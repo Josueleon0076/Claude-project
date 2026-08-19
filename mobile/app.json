@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Reloj Checador",
+    "slug": "reloj-checador",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.relojchecador",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Usamos Face ID para verificar tu identidad al registrar tu entrada o salida."
+      }
+    },
+    "android": {
+      "package": "com.example.relojchecador",
+      "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT"]
+    },
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Permite a Reloj Checador usar Face ID para verificar tu identidad."
+        }
+      ]
+    ]
+  }
+}
