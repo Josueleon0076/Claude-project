@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Teleprompter">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<title>Teleprompter</title>
+<!--
+  Teleprompter para grabar Reels.
+  Escrito en JavaScript ES5 y CSS sin funciones modernas a propósito:
+  debe funcionar en Safari 9 (iPad 3ª generación, iOS 9.3.5) y en el
+  WebView de Android 5+ (APK para el Oppo).
+-->
+<style>
+  * { -webkit-box-sizing: border-box; box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: #000; color: #eee;
+    font-family: -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none; user-select: none;
+  }
+  input, textarea { -webkit-user-select: text; user-select: text; }
+  .hidden { display: none !important; }
+
+  /* ---------- Pantalla de guiones ---------- */
+  #library { max-width: 820px; margin: 0 auto; padding: 16px 16px 60px; }
+  h1 { font-size: 26px; margin: 8px 0 16px; color: #fff; }
+  h2 { font-size: 18px; margin: 24px 0 10px; color: #bbb; font-weight: 600; }
+  .btn {
+    display: inline-block; border: 0; border-radius: 10px;
+    padding: 12px 18px; margin: 4px 6px 4px 0;
+    font-size: 17px; font-weight: 600; color: #fff; background: #333;
+    cursor: pointer; -webkit-appearance: none;
+  }
+  .btn.primary { background: #e0245e; }
+  .btn.ok { background: #1f8a4c; }
+  .btn.danger { background: #7a1f1f; }
+  .btn.small { padding: 8px 12px; font-size: 15px; }
+  .script {
+    background: #161616; border: 1px solid #2a2a2a; border-radius: 12px;
+    padding: 14px; margin-bottom: 10px; overflow: hidden;
+  }
+  .script .title { font-size: 19px; font-weight: 700; color: #fff; }
+  .script .meta { font-size: 14px; color: #999; margin: 4px 0 8px; }
+  .script .preview { font-size: 15px; color: #bbb; margin-bottom: 8px;
+    max-height: 42px; overflow: hidden; }
+  .empty { color: #888; padding: 20px 0; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 15px; color: #aaa; margin-bottom: 6px; }
+  .field input[type=text], .field textarea {
+    width: 100%; font-size: 18px; padding: 10px; border-radius: 8px;
+    border: 1px solid #444; background: #111; color: #fff;
+    -webkit-appearance: none;
+  }
+  .field textarea { min-height: 300px; line-height: 1.4; }
+  .hint { font-size: 13px; color: #888; margin-top: 6px; }
+
+  .setting { overflow: hidden; padding: 10px 0; border-bottom: 1px solid #222; }
+  .setting .name { float: left; width: 45%; font-size: 16px; padding-top: 6px; }
+  .setting .ctl { float: right; width: 55%; text-align: right; }
+  .setting input[type=range] { width: 70%; vertical-align: middle; }
+  .setting .val { display: inline-block; width: 28%; text-align: right; font-size: 15px; color: #ccc; }
+  .setting select { font-size: 16px; padding: 6px; background: #111; color: #fff; border: 1px solid #444; border-radius: 6px; }
+  .toggle { font-size: 16px; }
+  .toggle input { width: 22px; height: 22px; vertical-align: middle; }
+
+  /* ---------- Pantalla del teleprompter ---------- */
+  #prompter { position: fixed; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; background: #000; }
+  #stage { position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; }
+  #scroller { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+  #text { margin: 0 auto; font-weight: 600; word-wrap: break-word; }
+  #text p { margin: 0 0 0.8em; }
+  #text .cue { color: #ffd23f; font-weight: 700; font-size: 0.75em; }
+  #text .end { color: #666; text-align: center; font-size: 0.6em; padding-top: 1em; }
+  #guide {
+    position: absolute; left: 0; right: 0; height: 0;
+    border-top: 2px solid rgba(224,36,94,0.55);
+    pointer-events: none;
+  }
+  #guide:before, #guide:after {
+    content: ""; position: absolute; top: -12px;
+    border-top: 11px solid transparent; border-bottom: 11px solid transparent;
+  }
+  #guide:before { left: 0; border-left: 16px solid #e0245e; }
+  #guide:after { right: 0; border-right: 16px solid #e0245e; }
+  #shadeTop {
+    position: absolute; left: 0; right: 0; top: 0; pointer-events: none;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0));
+  }
+  #countdown {
+    position: absolute; left: 0; right: 0; top: 35%; text-align: center;
+    font-size: 160px; font-weight: 800; color: #e0245e; pointer-events: none;
+  }
+  #toast {
+    position: absolute; left: 50%; top: 20px; width: 260px; margin-left: -130px;
+    text-align: center; background: rgba(40,40,40,0.9); color: #fff;
+    border-radius: 20px; padding: 8px 12px; font-size: 18px; pointer-events: none;
+  }
+  #progress { position: absolute; left: 0; bottom: 0; height: 4px; background: #e0245e; width: 0; pointer-events: none; }
+  #bar {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: rgba(20,20,20,0.95); border-top: 1px solid #333;
+    padding: 8px 10px 12px; text-align: center;
+  }
+  #bar .btn { padding: 10px 12px; font-size: 16px; margin: 3px 2px; min-width: 48px; }
+  #bar .info { font-size: 14px; color: #aaa; margin-bottom: 4px; }
+  #bar .group { display: inline-block; margin: 0 6px; white-space: nowrap; }
+  #bar .lbl { display: inline-block; min-width: 72px; font-size: 15px; color: #ddd; }
+  #playHint { position: absolute; left: 0; right: 0; top: 12px; text-align: center; color: #777; font-size: 15px; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ===================== GUIONES ===================== -->
+<div id="library">
+  <h1>🎬 Teleprompter</h1>
+
+  <div id="listView">
+    <button class="btn primary" id="newBtn">+ Nuevo guion</button>
+    <div id="list"></div>
+
+    <h2>Ajustes de lectura</h2>
+    <div id="settings"></div>
+    <div class="hint">
+      Controles durante la lectura: toca la pantalla para pausar o continuar ·
+      arrastra para moverte · teclado/control Bluetooth: Espacio, Enter o
+      AvPág = pausa · RePág o ← = retroceder · ↑/↓ = velocidad.
+      En la APK de Android: Volumen + = pausa, Volumen − = retroceder.
+    </div>
+  </div>
+
+  <div id="editView" class="hidden">
+    <div class="field">
+      <label for="titleInput">Título</label>
+      <input type="text" id="titleInput" placeholder="Ej. Promo 2x1 de septiembre">
+    </div>
+    <div class="field">
+      <label for="bodyInput">Texto del guion</label>
+      <textarea id="bodyInput" placeholder="Escribe o pega aquí el guion..."></textarea>
+      <div class="hint">
+        Deja una línea en blanco entre párrafos. Escribe indicaciones entre
+        corchetes, como [PAUSA], [SONRÍE] o [MOSTRAR PRODUCTO]: se ven en
+        amarillo y no cuentan como palabras. <span id="editStats"></span>
+      </div>
+    </div>
+    <button class="btn ok" id="saveBtn">Guardar</button>
+    <button class="btn primary" id="saveReadBtn">Guardar y leer ▶</button>
+    <button class="btn" id="cancelBtn">Cancelar</button>
+    <button class="btn danger" id="deleteBtn">Borrar</button>
+  </div>
+</div>
+
+<!-- ===================== TELEPROMPTER ===================== -->
+<div id="prompter" class="hidden">
+  <div id="stage">
+    <div id="scroller"><div id="text"></div></div>
+    <div id="shadeTop"></div>
+    <div id="guide"></div>
+  </div>
+  <div id="playHint">Toca la pantalla para leer · toca otra vez para pausar</div>
+  <div id="countdown" class="hidden"></div>
+  <div id="toast" class="hidden"></div>
+  <div id="progress"></div>
+  <div id="bar">
+    <div class="info" id="barInfo"></div>
+    <div class="group">
+      <button class="btn" id="exitBtn">✕ Salir</button>
+      <button class="btn" id="restartBtn">⟲ Inicio</button>
+    </div>
+    <div class="group">
+      <button class="btn" id="slowerBtn">−</button>
+      <span class="lbl" id="speedLbl"></span>
+      <button class="btn" id="fasterBtn">+</button>
+    </div>
+    <div class="group">
+      <button class="btn" id="smallerBtn">A−</button>
+      <button class="btn" id="biggerBtn">A+</button>
+      <button class="btn" id="mirrorBtn">⇋ Espejo</button>
+    </div>
+    <div class="group">
+      <button class="btn primary" id="playBtn">▶ Leer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ------------------------------------------------------------------
+  // Almacenamiento (localStorage puede fallar en modo privado)
+  // ------------------------------------------------------------------
+  var STORE_SCRIPTS = 'tp.scripts.v1';
+  var STORE_SETTINGS = 'tp.settings.v1';
+
+  function load(key, fallback) {
+    try {
+      var raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function save(key, value) {
+    try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+  function $(id) { return document.getElementById(id); }
+  function extend(target, src) {
+    for (var k in src) { if (src.hasOwnProperty(k)) { target[k] = src[k]; } }
+    return target;
+  }
+
+  var DEFAULTS = {
+    wpm: 140,          // palabras por minuto
+    fontSize: 56,      // px
+    lineHeight: 1.35,
+    width: 90,         // % del ancho de pantalla
+    guide: 30,         // posición de la línea guía (% desde arriba)
+    countdown: 3,      // segundos
+    mirrorH: false,
+    mirrorV: false,
+    align: 'left',
+    theme: 'white'     // white | yellow | black
+  };
+  var THEMES = {
+    white:  { fg: '#ffffff', bg: '#000000' },
+    yellow: { fg: '#ffe66d', bg: '#000000' },
+    black:  { fg: '#000000', bg: '#ffffff' }
+  };
+
+  var settings = extend(extend({}, DEFAULTS), load(STORE_SETTINGS, {}));
+  var scripts = load(STORE_SCRIPTS, null);
+  if (!scripts) {
+    scripts = [{
+      id: 'demo',
+      title: 'Ejemplo: promoción',
+      body: '¡Hola! [SONRÍE]\n\nHoy te quiero contar algo que nos encanta de nuestro negocio.\n\n' +
+            'Durante todo este mes tenemos una promoción especial: llévate dos y paga solo uno. [PAUSA]\n\n' +
+            'Es perfecto para regalar o para consentirte. [MOSTRAR PRODUCTO]\n\n' +
+            'Escríbenos por mensaje directo o visítanos. ¡Te esperamos!',
+      updated: Date.now()
+    }];
+    save(STORE_SCRIPTS, scripts);
+  }
+
+  // ------------------------------------------------------------------
+  // Utilidades de texto
+  // ------------------------------------------------------------------
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+  }
+  function countWords(s) {
+    var clean = s.replace(/\[[^\]]*\]/g, ' ').replace(/^\s+|\s+$/g, '');
+    return clean ? clean.split(/\s+/).length : 0;
+  }
+  function fmtTime(sec) {
+    sec = Math.max(0, Math.round(sec));
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function renderText(body) {
+    var paras = body.replace(/\r/g, '').split(/\n\s*\n/);
+    var html = '';
+    for (var i = 0; i < paras.length; i++) {
+      var p = paras[i].replace(/^\s+|\s+$/g, '');
+      if (!p) { continue; }
+      p = escapeHtml(p)
+        .replace(/\[([^\]]*)\]/g, '<span class="cue">[$1]</span>')
+        .replace(/\n/g, '<br>');
+      html += '<p>' + p + '</p>';
+    }
+    return html + '<p class="end">— FIN —</p>';
+  }
+  function findScript(id) {
+    for (var i = 0; i < scripts.length; i++) { if (scripts[i].id === id) { return scripts[i]; } }
+    return null;
+  }
+
+  // ------------------------------------------------------------------
+  // Pantalla de guiones
+  // ------------------------------------------------------------------
+  var editingId = null;
+
+  function renderList() {
+    var list = $('list');
+    scripts.sort(function (a, b) { return b.updated - a.updated; });
+    if (!scripts.length) {
+      list.innerHTML = '<div class="empty">Todavía no hay guiones. Toca “Nuevo guion”.</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < scripts.length; i++) {
+      var s = scripts[i];
+      var words = countWords(s.body);
+      html += '<div class="script">' +
+        '<div class="title">' + escapeHtml(s.title || 'Sin título') + '</div>' +
+        '<div class="meta">' + words + ' palabras · ≈ ' +
+          fmtTime(words / settings.wpm * 60) + ' a ' + settings.wpm + ' ppm</div>' +
+        '<div class="preview">' + escapeHtml(s.body.slice(0, 160)) + '</div>' +
+        '<button class="btn primary small" data-act="read" data-id="' + s.id + '">▶ Leer</button>' +
+        '<button class="btn small" data-act="edit" data-id="' + s.id + '">Editar</button>' +
+        '</div>';
+    }
+    list.innerHTML = html;
+  }
+
+  $('list').onclick = function (e) {
+    var el = e.target;
+    var act = el.getAttribute && el.getAttribute('data-act');
+    if (!act) { return; }
+    var id = el.getAttribute('data-id');
+    if (act === 'read') { openPrompter(id); } else { openEditor(id); }
+  };
+
+  function openEditor(id) {
+    editingId = id;
+    var s = id ? findScript(id) : null;
+    $('titleInput').value = s ? s.title : '';
+    $('bodyInput').value = s ? s.body : '';
+    $('deleteBtn').className = s ? 'btn danger' : 'btn danger hidden';
+    $('listView').className = 'hidden';
+    $('editView').className = '';
+    updateEditStats();
+    window.scrollTo(0, 0);
+  }
+  function closeEditor() {
+    $('editView').className = 'hidden';
+    $('listView').className = '';
+    renderList();
+  }
+  function updateEditStats() {
+    var w = countWords($('bodyInput').value);
+    $('editStats').innerHTML = '<br><b>' + w + ' palabras · ≈ ' +
+      fmtTime(w / settings.wpm * 60) + '</b> a ' + settings.wpm + ' palabras por minuto.';
+  }
+  function saveEditor() {
+    var title = $('titleInput').value.replace(/^\s+|\s+$/g, '') || 'Sin título';
+    var body = $('bodyInput').value;
+    var s = editingId ? findScript(editingId) : null;
+    if (!s) {
+      s = { id: 's' + Date.now() };
+      scripts.push(s);
+    }
+    s.title = title; s.body = body; s.updated = Date.now();
+    save(STORE_SCRIPTS, scripts);
+    editingId = s.id;
+    return s.id;
+  }
+
+  $('bodyInput').oninput = updateEditStats;
+  $('newBtn').onclick = function () { openEditor(null); };
+  $('cancelBtn').onclick = closeEditor;
+  $('saveBtn').onclick = function () { saveEditor(); closeEditor(); };
+  $('saveReadBtn').onclick = function () { var id = saveEditor(); closeEditor(); openPrompter(id); };
+  $('deleteBtn').onclick = function () {
+    if (!editingId || !window.confirm('¿Borrar este guion?')) { return; }
+    for (var i = 0; i < scripts.length; i++) {
+      if (scripts[i].id === editingId) { scripts.splice(i, 1); break; }
+    }
+    save(STORE_SCRIPTS, scripts);
+    closeEditor();
+  };
+
+  // ------------------------------------------------------------------
+  // Ajustes
+  // ------------------------------------------------------------------
+  var SETTINGS_UI = [
+    { key: 'wpm', name: 'Velocidad', type: 'range', min: 60, max: 300, step: 10, unit: ' ppm' },
+    { key: 'fontSize', name: 'Tamaño de letra', type: 'range', min: 24, max: 140, step: 2, unit: ' px' },
+    { key: 'lineHeight', name: 'Interlineado', type: 'range', min: 1, max: 2, step: 0.05, unit: '' },
+    { key: 'width', name: 'Ancho del texto', type: 'range', min: 50, max: 100, step: 5, unit: '%' },
+    { key: 'guide', name: 'Altura de la línea guía', type: 'range', min: 10, max: 60, step: 5, unit: '%' },
+    { key: 'countdown', name: 'Cuenta regresiva', type: 'select',
+      options: [[0, 'Sin cuenta'], [3, '3 segundos'], [5, '5 segundos']] },
+    { key: 'theme', name: 'Colores', type: 'select',
+      options: [['white', 'Blanco sobre negro'], ['yellow', 'Amarillo sobre negro'], ['black', 'Negro sobre blanco']] },
+    { key: 'align', name: 'Alineación', type: 'select',
+      options: [['left', 'Izquierda'], ['center', 'Centrado']] },
+    { key: 'mirrorH', name: 'Espejo horizontal', type: 'check' },
+    { key: 'mirrorV', name: 'Espejo vertical', type: 'check' }
+  ];
+
+  function renderSettings() {
+    var html = '';
+    for (var i = 0; i < SETTINGS_UI.length; i++) {
+      var d = SETTINGS_UI[i], v = settings[d.key], ctl;
+      if (d.type === 'range') {
+        ctl = '<input type="range" data-key="' + d.key + '" min="' + d.min + '" max="' + d.max +
+              '" step="' + d.step + '" value="' + v + '"><span class="val" id="val_' + d.key + '">' +
+              v + d.unit + '</span>';
+      } else if (d.type === 'select') {
+        ctl = '<select data-key="' + d.key + '">';
+        for (var j = 0; j < d.options.length; j++) {
+          var o = d.options[j];
+          ctl += '<option value="' + o[0] + '"' + (String(o[0]) === String(v) ? ' selected' : '') + '>' + o[1] + '</option>';
+        }
+        ctl += '</select>';
+      } else {
+        ctl = '<label class="toggle"><input type="checkbox" data-key="' + d.key + '"' + (v ? ' checked' : '') + '></label>';
+      }
+      html += '<div class="setting"><div class="name">' + d.name + '</div><div class="ctl">' + ctl + '</div></div>';
+    }
+    $('settings').innerHTML = html;
+  }
+
+  function onSettingChange(e) {
+    var el = e.target, key = el.getAttribute('data-key');
+    if (!key) { return; }
+    var def = null;
+    for (var i = 0; i < SETTINGS_UI.length; i++) { if (SETTINGS_UI[i].key === key) { def = SETTINGS_UI[i]; } }
+    var v;
+    if (def.type === 'check') { v = el.checked; }
+    else if (typeof DEFAULTS[key] === 'number') { v = parseFloat(el.value); }
+    else { v = el.value; }
+    settings[key] = v;
+    save(STORE_SETTINGS, settings);
+    if (def.type === 'range') { $('val_' + key).innerHTML = v + def.unit; }
+    if (key === 'wpm') { renderList(); }
+  }
+  $('settings').onchange = onSettingChange;
+  $('settings').oninput = onSettingChange;
+
+  // ------------------------------------------------------------------
+  // Teleprompter
+  // ------------------------------------------------------------------
+  var P = {
+    active: false,
+    playing: false,
+    pos: 0,            // px desplazados
+    maxPos: 0,
+    pxPerWord: 1,
+    words: 0,
+    lastT: 0,
+    countdownTimer: null,
+    toastTimer: null
+  };
+  var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+            function (cb) { return setTimeout(function () { cb(Date.now()); }, 16); };
+  var wakeLock = null;
+
+  function now() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+
+  function applyLayout() {
+    var theme = THEMES[settings.theme] || THEMES.white;
+    var h = window.innerHeight;
+    var text = $('text');
+    $('prompter').style.background = theme.bg;
+    text.style.color = theme.fg;
+    text.style.fontSize = settings.fontSize + 'px';
+    text.style.lineHeight = settings.lineHeight;
+    text.style.width = settings.width + '%';
+    text.style.textAlign = settings.align;
+    var guideY = Math.round(h * settings.guide / 100);
+    $('guide').style.top = guideY + 'px';
+    $('shadeTop').style.height = Math.max(0, guideY - settings.fontSize) + 'px';
+    $('shadeTop').style.display = settings.theme === 'black' ? 'none' : '';
+
+    var sx = settings.mirrorH ? -1 : 1, sy = settings.mirrorV ? -1 : 1;
+    var t = 'scale(' + sx + ',' + sy + ')';
+    $('stage').style.webkitTransform = t;
+    $('stage').style.transform = t;
+
+    // Distancia recorrida por palabra, para que la velocidad sea en ppm reales.
+    var textHeight = text.offsetHeight;
+    P.maxPos = Math.max(1, textHeight - settings.fontSize * settings.lineHeight * 2);
+    P.pxPerWord = P.words ? P.maxPos / P.words : 1;
+    P.pos = Math.min(P.pos, P.maxPos);
+    paint();
+  }
+
+  function paint() {
+    var guideY = window.innerHeight * settings.guide / 100;
+    // La primera línea queda justo debajo de la línea guía al iniciar.
+    var y = Math.round(guideY - settings.fontSize * 0.2 - P.pos);
+    var t = 'translate3d(0,' + y + 'px,0)';
+    var sc = $('scroller');
+    sc.style.webkitTransform = t;
+    sc.style.transform = t;
+    var pct = Math.min(100, P.pos / P.maxPos * 100);
+    $('progress').style.width = pct + '%';
+  }
+
+  function updateBar() {
+    var remainingWords = Math.max(0, P.words - P.pos / P.pxPerWord);
+    $('speedLbl').innerHTML = settings.wpm + ' ppm';
+    $('barInfo').innerHTML = Math.round(Math.min(100, P.pos / P.maxPos * 100)) + '% leído · quedan ≈ ' +
+      fmtTime(remainingWords / settings.wpm * 60) + ' · letra ' + settings.fontSize + ' px';
+    $('playBtn').innerHTML = P.pos > 0 && P.pos < P.maxPos ? '▶ Continuar' : '▶ Leer';
+  }
+
+  function showBar(show) {
+    $('bar').className = show ? '' : 'hidden';
+    $('playHint').className = show ? '' : 'hidden';
+    if (show) { updateBar(); }
+  }
+
+  function toast(msg) {
+    var el = $('toast');
+    el.innerHTML = msg;
+    el.className = '';
+    clearTimeout(P.toastTimer);
+    P.toastTimer = setTimeout(function () { el.className = 'hidden'; }, 1200);
+  }
+
+  function tick() {
+    if (!P.playing) { return; }
+    var t = now();
+    var dt = Math.min(0.1, (t - P.lastT) / 1000);
+    P.lastT = t;
+    P.pos += settings.wpm / 60 * P.pxPerWord * dt;
+    if (P.pos >= P.maxPos) {
+      P.pos = P.maxPos;
+      paint();
+      pause();
+      return;
+    }
+    paint();
+    raf(tick);
+  }
+
+  function requestWakeLock() {
+    try {
+      if (navigator.wakeLock && navigator.wakeLock.request) {
+        navigator.wakeLock.request('screen').then(function (l) { wakeLock = l; }, function () {});
+      }
+    } catch (e) {}
+  }
+  function releaseWakeLock() {
+    try { if (wakeLock) { wakeLock.release(); } } catch (e) {}
+    wakeLock = null;
+  }
+
+  function play() {
+    if (P.playing || P.countdownTimer) { return; }
+    if (P.pos >= P.maxPos) { P.pos = 0; paint(); }
+    showBar(false);
+    requestWakeLock();
+    var n = P.pos === 0 ? settings.countdown : 0;
+    var cd = $('countdown');
+    function go() {
+      cd.className = 'hidden';
+      P.countdownTimer = null;
+      P.playing = true;
+      P.lastT = now();
+      raf(tick);
+    }
+    if (!n) { go(); return; }
+    cd.innerHTML = n;
+    cd.className = '';
+    P.countdownTimer = setInterval(function () {
+      n--;
+      if (n <= 0) { clearInterval(P.countdownTimer); go(); }
+      else { cd.innerHTML = n; }
+    }, 1000);
+  }
+
+  function pause() {
+    if (P.countdownTimer) {
+      clearInterval(P.countdownTimer);
+      P.countdownTimer = null;
+      $('countdown').className = 'hidden';
+    }
+    P.playing = false;
+    showBar(true);
+  }
+
+  function toggle() { if (P.playing || P.countdownTimer) { pause(); } else { play(); } }
+
+  function rewind() {
+    // Retrocede unas dos líneas.
+    P.pos = Math.max(0, P.pos - settings.fontSize * settings.lineHeight * 2);
+    paint();
+    if (!P.playing) { updateBar(); }
+    toast('⟲ Retroceder');
+  }
+
+  function changeSpeed(delta) {
+    settings.wpm = Math.max(60, Math.min(300, settings.wpm + delta));
+    save(STORE_SETTINGS, settings);
+    updateBar();
+    toast(settings.wpm + ' palabras/min');
+  }
+
+  function changeFont(delta) {
+    var ratio = P.pos / P.maxPos;
+    settings.fontSize = Math.max(24, Math.min(140, settings.fontSize + delta));
+    save(STORE_SETTINGS, settings);
+    applyLayout();
+    P.pos = ratio * P.maxPos;
+    paint();
+    updateBar();
+    toast('Letra ' + settings.fontSize + ' px');
+  }
+
+  function openPrompter(id) {
+    var s = findScript(id);
+    if (!s) { return; }
+    P.words = Math.max(1, countWords(s.body));
+    $('text').innerHTML = renderText(s.body);
+    $('library').className = 'hidden';
+    $('prompter').className = '';
+    P.active = true;
+    P.pos = 0;
+    P.playing = false;
+    applyLayout();
+    showBar(true);
+    window.scrollTo(0, 0);
+  }
+
+  function closePrompter() {
+    pause();
+    releaseWakeLock();
+    P.active = false;
+    $('prompter').className = 'hidden';
+    $('library').className = '';
+    renderSettings();
+    renderList();
+  }
+
+  // Botones de la barra (se usa touchend para respuesta inmediata en iPad).
+  function bindBtn(id, fn) {
+    var el = $(id);
+    el.onclick = function (e) { e.stopPropagation(); fn(); };
+    el.addEventListener('touchstart', function (e) { e.stopPropagation(); }, false);
+    el.addEventListener('touchend', function (e) { e.stopPropagation(); e.preventDefault(); fn(); }, false);
+  }
+  bindBtn('exitBtn', closePrompter);
+  bindBtn('restartBtn', function () { P.pos = 0; paint(); updateBar(); });
+  bindBtn('slowerBtn', function () { changeSpeed(-10); });
+  bindBtn('fasterBtn', function () { changeSpeed(10); });
+  bindBtn('smallerBtn', function () { changeFont(-4); });
+  bindBtn('biggerBtn', function () { changeFont(4); });
+  bindBtn('mirrorBtn', function () {
+    settings.mirrorH = !settings.mirrorH;
+    save(STORE_SETTINGS, settings);
+    applyLayout();
+  });
+  bindBtn('playBtn', play);
+  $('bar').addEventListener('touchstart', function (e) { e.stopPropagation(); }, false);
+  $('bar').onclick = function (e) { e.stopPropagation(); };
+
+  // Tocar = pausa/continuar; arrastrar = mover el texto.
+  var touch = null;
+  var prompterEl = $('prompter');
+  prompterEl.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { return; }
+    touch = { y: e.touches[0].clientY, startPos: P.pos, t: Date.now(), moved: false, wasPlaying: P.playing };
+  }, false);
+  prompterEl.addEventListener('touchmove', function (e) {
+    if (!touch) { return; }
+    e.preventDefault();
+    var dy = e.touches[0].clientY - touch.y;
+    if (Math.abs(dy) > 10) { touch.moved = true; }
+    if (!touch.moved) { return; }
+    if (P.playing) { P.playing = false; }
+    var dir = settings.mirrorV ? 1 : -1;
+    P.pos = Math.max(0, Math.min(P.maxPos, touch.startPos + dir * dy));
+    paint();
+  }, false);
+  prompterEl.addEventListener('touchend', function (e) {
+    if (!touch) { return; }
+    e.preventDefault();
+    var t = touch;
+    touch = null;
+    if (!t.moved) { toggle(); return; }
+    if (t.wasPlaying) { P.playing = true; P.lastT = now(); raf(tick); }
+    else { updateBar(); }
+  }, false);
+  prompterEl.onclick = function () { if (!('ontouchstart' in window)) { toggle(); } };
+  prompterEl.addEventListener('wheel', function (e) {
+    P.pos = Math.max(0, Math.min(P.maxPos, P.pos + e.deltaY));
+    paint();
+    if (!P.playing) { updateBar(); }
+  }, false);
+
+  // Teclado / control remoto Bluetooth.
+  document.addEventListener('keydown', function (e) {
+    if (!P.active) { return; }
+    var k = e.keyCode;
+    var handled = true;
+    if (k === 32 || k === 13 || k === 34 || k === 39 || k === 175 || k === 179) { toggle(); }
+    else if (k === 33 || k === 37 || k === 174) { rewind(); }
+    else if (k === 38) { changeSpeed(10); }
+    else if (k === 40) { changeSpeed(-10); }
+    else if (k === 187 || k === 107) { changeFont(4); }
+    else if (k === 189 || k === 109) { changeFont(-4); }
+    else if (k === 27) { closePrompter(); }
+    else { handled = false; }
+    if (handled) { e.preventDefault(); }
+  }, false);
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (!P.active) { return; }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var ratio = P.pos / P.maxPos;
+      applyLayout();
+      P.pos = ratio * P.maxPos;
+      paint();
+      if (!P.playing) { updateBar(); }
+    }, 150);
+  }, false);
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && P.playing) { pause(); }
+    if (!document.hidden && P.active) { requestWakeLock(); }
+  }, false);
+
+  // ------------------------------------------------------------------
+  // Puente para la APK de Android (botones de volumen y atrás)
+  // ------------------------------------------------------------------
+  window.tp = {
+    remote: function (cmd) {
+      if (!P.active) { return; }
+      if (cmd === 'toggle') { toggle(); }
+      else if (cmd === 'rewind') { rewind(); }
+      else if (cmd === 'faster') { changeSpeed(10); }
+      else if (cmd === 'slower') { changeSpeed(-10); }
+    },
+    isPrompting: function () { return P.active; },
+    back: function () {
+      if (P.active) { closePrompter(); return true; }
+      if ($('editView').className !== 'hidden') { closeEditor(); return true; }
+      return false;
+    }
+  };
+
+  renderSettings();
+  renderList();
+})();
+</script>
+</body>
+</html>

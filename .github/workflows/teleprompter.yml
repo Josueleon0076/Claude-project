@@ -1,0 +1,49 @@
+name: Teleprompter
+
+on:
+  push:
+    paths:
+      - 'teleprompter/**'
+      - '.github/workflows/teleprompter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    name: Compilar APK (Android)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Compilar
+        working-directory: teleprompter/android
+        run: gradle --no-daemon assembleDebug
+
+      - name: Renombrar APK
+        run: cp teleprompter/android/app/build/outputs/apk/debug/app-debug.apk Teleprompter.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Teleprompter-apk
+          path: Teleprompter.apk
+
+      - name: Publicar en Releases (descarga directa desde el celular)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete teleprompter-latest --yes --cleanup-tag || true
+          gh release create teleprompter-latest Teleprompter.apk teleprompter/web/index.html \
+            --target "$GITHUB_SHA" --prerelease \
+            --title "Teleprompter (última versión)" \
+            --notes "APK para Android e index.html para iPad/navegador. Rama: $GITHUB_REF_NAME"
