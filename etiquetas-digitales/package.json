@@ -1,0 +1,15 @@
+{
+  "name": "etiquetas-digitales",
+  "version": "1.0.0",
+  "description": "Etiquetas de precio digitales para mini pantallas: panel de administración + pantallas que se actualizan en tiempo real",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bwip-js": "^4.5.1",
+    "express": "^4.19.2"
+  }
+}

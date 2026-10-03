@@ -68,5 +68,10 @@ npx expo start
 - Migrar el backend de SQLite a Postgres para producción con varios
   servidores.
 
+## Otros proyectos en este repositorio
+
+- [`etiquetas-digitales/`](etiquetas-digitales/README.md): etiquetas de precio
+  digitales para mini pantallas, que se actualizan en tiempo real desde un panel web.
+
 Cada carpeta (`backend/`, `mobile/`) tiene su propio `README.md` con más
 detalle.

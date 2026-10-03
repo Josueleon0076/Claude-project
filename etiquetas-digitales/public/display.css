@@ -1,0 +1,74 @@
+/* Diseño pensado para mini pantallas (3.5" a 10"), horizontal o vertical.
+   Todos los tamaños usan vmin para escalar con la pantalla. */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #555555;
+  --accent: #d0021b;
+}
+body.dark {
+  --bg: #0d0d0d;
+  --fg: #f5f5f5;
+  --muted: #b0b0b0;
+  --accent: #ff4d5e;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  cursor: none;
+  user-select: none;
+}
+.label {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  padding: 4vmin 5vmin 2vmin;
+  gap: 2vmin;
+  transition: opacity .3s;
+}
+.label.fade { opacity: 0; }
+h1 {
+  margin: 0;
+  font-size: 6vmin;
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.department { margin: .5vmin 0 0; font-size: 4vmin; color: var(--muted); text-transform: uppercase; }
+.price {
+  margin: 2vmin 0 0;
+  font-size: 24vmin;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.price.sale { color: var(--accent); }
+.regular { margin: 1.5vmin 0 0; font-size: 5vmin; color: var(--muted); display: flex; gap: 2vmin; align-items: baseline; flex-wrap: wrap; }
+.savings { color: var(--accent); font-weight: 700; }
+.codes { display: flex; align-items: flex-end; justify-content: space-between; gap: 4vmin; }
+.barcode-box { flex: 1; min-width: 0; }
+.barcode-box img { width: 100%; max-width: 70vmin; height: 14vmin; object-fit: fill; display: block; background: #fff; padding: 1vmin; }
+.sku { margin: 1vmin 0 0; font-size: 3.5vmin; }
+.qr-box { text-align: center; font-size: 3vmin; }
+.qr-box img { width: 20vmin; height: 20vmin; display: block; background: #fff; padding: 1vmin; }
+.qr-box p { margin: .5vmin 0 0; }
+footer { font-size: 2.6vmin; color: var(--muted); }
+.message {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 5vmin;
+  font-size: 5vmin; color: var(--muted);
+}
+.status {
+  position: fixed; top: 1.5vmin; right: 1.5vmin;
+  width: 1.8vmin; height: 1.8vmin; border-radius: 50%;
+  background: #bbb;
+}
+.status.online { background: #2ecc71; }
+.status.offline { background: #e74c3c; }

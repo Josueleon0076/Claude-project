@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etiquetas digitales · Panel</title>
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <section id="login" class="card login">
+    <h1>Etiquetas digitales</h1>
+    <form id="loginForm">
+      <label>Clave de administrador <input id="key" type="password" required autocomplete="current-password"></label>
+      <button>Entrar</button>
+      <p id="loginError" class="error"></p>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <header>
+      <h1>Etiquetas digitales</h1>
+      <nav>
+        <button data-tab="products" class="active">Productos</button>
+        <button data-tab="screens">Pantallas</button>
+        <button data-tab="import">Importar CSV</button>
+        <button data-tab="settings">Ajustes</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="tab-products" class="tab">
+        <form id="productForm" class="card grid">
+          <h2>Agregar / editar producto</h2>
+          <label>SKU <input name="sku" required></label>
+          <label>Nombre <input name="name" required></label>
+          <label>Departamento <input name="department"></label>
+          <label>Precio <input name="price" type="number" step="0.01" min="0" required></label>
+          <label>Precio regular (opcional, se muestra tachado) <input name="regularPrice" type="number" step="0.01" min="0"></label>
+          <label>Código de barras (si es distinto al SKU) <input name="barcode"></label>
+          <div class="actions"><button>Guardar</button><button type="reset" class="secondary">Limpiar</button></div>
+        </form>
+        <div class="card">
+          <input id="search" type="search" placeholder="Buscar por nombre, SKU o departamento…">
+          <table>
+            <thead><tr><th>SKU</th><th>Producto</th><th>Precio</th><th>Regular</th><th>Pantallas</th><th></th></tr></thead>
+            <tbody id="productRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-screens" class="tab" hidden>
+        <form id="screenForm" class="card grid">
+          <h2>Agregar / editar pantalla</h2>
+          <label>ID (va en la URL) <input name="id" required placeholder="pasillo-2"></label>
+          <label>Nombre / ubicación <input name="name" placeholder="Pasillo 2 - Estante B"></label>
+          <label class="wide">SKUs a mostrar (separados por coma; si son varios, rotan) <input name="skus"></label>
+          <label>Segundos por producto <input name="rotateSeconds" type="number" min="3" value="8"></label>
+          <label>Tema <select name="theme"><option value="light">Claro</option><option value="dark">Oscuro</option></select></label>
+          <div class="actions"><button>Guardar</button><button type="reset" class="secondary">Limpiar</button></div>
+        </form>
+        <div class="card">
+          <table>
+            <thead><tr><th>Estado</th><th>Pantalla</th><th>Productos</th><th>URL para la pantalla</th><th></th></tr></thead>
+            <tbody id="screenRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-import" class="tab" hidden>
+        <div class="card">
+          <h2>Actualizar precios desde CSV / Excel</h2>
+          <p>Exporta desde tu punto de venta o Excel como CSV con las columnas
+            <code>sku, nombre, departamento, precio, precio_regular, codigo_barras</code>.
+            Solo <code>sku</code> y <code>precio</code> son obligatorios para productos existentes.
+            Las pantallas se actualizan al instante.</p>
+          <input id="csvFile" type="file" accept=".csv,text/csv">
+          <textarea id="csvText" rows="10" placeholder="sku,nombre,departamento,precio,precio_regular&#10;020800755726,PEPTO BISMOL PLUS ORAL 236 ML LIQ,GASTROENTEROLOGIA,245.00,279.00"></textarea>
+          <button id="importBtn">Importar</button>
+          <pre id="importResult"></pre>
+        </div>
+      </section>
+
+      <section id="tab-settings" class="tab" hidden>
+        <form id="settingsForm" class="card grid">
+          <h2>Ajustes generales</h2>
+          <label>Nombre de la tienda <input name="storeName"></label>
+          <label>URL del QR (descarga de app; vacío = sin QR) <input name="appUrl"></label>
+          <label>Texto del precio tachado <input name="regularPriceLabel"></label>
+          <label class="wide">Leyenda inferior <input name="footer"></label>
+          <div class="actions"><button>Guardar</button></div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" hidden></div>
+  <script src="/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Etiqueta digital</title>
+  <link rel="stylesheet" href="/display.css">
+</head>
+<body>
+  <main id="label" class="label" hidden>
+    <section class="info">
+      <h1 id="name"></h1>
+      <p id="department" class="department"></p>
+      <p id="price" class="price"></p>
+      <p id="regular" class="regular" hidden>
+        <span id="regularLabel"></span>
+        <s id="regularPrice"></s>
+        <span id="savings" class="savings"></span>
+      </p>
+    </section>
+    <section class="codes">
+      <div class="barcode-box">
+        <img id="barcode" alt="Código de barras">
+        <p class="sku">SKU: <span id="sku"></span></p>
+      </div>
+      <div class="qr-box">
+        <img id="qr" alt="QR de la app">
+        <p>Descarga la App</p>
+      </div>
+    </section>
+    <footer id="footer"></footer>
+  </main>
+  <div id="message" class="message">Conectando…</div>
+  <div id="status" class="status" title="Conexión con el servidor"></div>
+  <script src="/display.js"></script>
+</body>
+</html>
