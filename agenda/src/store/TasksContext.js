@@ -15,7 +15,15 @@ import { sampleTasks } from './sample';
 
 const TASKS_KEY = 'agenda.tasks.v1';
 const SETTINGS_KEY = 'agenda.settings.v1';
-export const DEFAULT_SETTINGS = { nagMinutes: 5, preAlertMinutes: 0 };
+export const DEFAULT_SETTINGS = {
+  nagMinutes: 5,
+  preAlertMinutes: 0,
+  // Horario laboral: fuera de él no se envían avisos.
+  quietEnabled: true,
+  workDays: [1, 2, 3, 4, 5, 6], // 0 = domingo
+  workStart: '08:00',
+  workEnd: '20:00',
+};
 
 const TasksContext = createContext(null);
 

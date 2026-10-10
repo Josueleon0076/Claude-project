@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import { planReminders } from './reminderPlan';
+import { inWorkHours, planReminders } from './reminderPlan';
 import { pendingForReminders } from './occurrences';
 import { todayKey } from './dates';
 
@@ -71,6 +71,7 @@ async function doReschedule(tasks, settings) {
     now,
     nagMinutes: settings.nagMinutes,
     preAlertMinutes: settings.preAlertMinutes,
+    isWorkTime: settings.quietEnabled ? (ms) => inWorkHours(ms, settings) : undefined,
     // iOS permite como máximo 64 notificaciones programadas por app.
     limit: Platform.OS === 'ios' ? 60 : 150,
   });

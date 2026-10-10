@@ -70,14 +70,19 @@ export function dayStats(occs, now) {
 // - Tareas únicas: hasta 30 días atrás (insisten hasta que se completen).
 // - Tareas que se repiten: solo la de hoy en adelante; las de días pasados
 //   quedan marcadas como "no completadas" en el historial.
-export function pendingForReminders(tasks, todayKey, daysAhead = 2) {
+export function pendingForReminders(tasks, todayKey, daysAhead = 4) {
   const out = [];
   for (let i = -30; i <= daysAhead; i++) {
     const key = addDays(todayKey, i);
     for (const occ of occurrencesOn(tasks, key)) {
       if (occ.doneAt) continue;
       if (i < 0 && occ.task.repeat !== 'none') continue;
-      out.push({ ...occ, start: Math.max(occ.due, occ.snoozeUntil || 0) });
+      out.push({
+        ...occ,
+        start: Math.max(occ.due, occ.snoozeUntil || 0),
+        // Las repetitivas dejan de insistir al terminar su día.
+        expiresAt: occ.task.repeat === 'none' ? Infinity : dueMs(addDays(key, 1), '00:00'),
+      });
     }
   }
   return out;

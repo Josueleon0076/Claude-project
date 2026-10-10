@@ -11,6 +11,20 @@ export function nextTick(ms, intervalMs) {
   return (Math.floor(local / intervalMs) + 1) * intervalMs - offset;
 }
 
+// ¿El instante `ms` cae dentro del horario laboral? Soporta turnos que
+// cruzan la medianoche (p. ej. 22:00–06:00).
+export function inWorkHours(ms, { workDays, workStart, workEnd }) {
+  const d = new Date(ms);
+  const mins = d.getHours() * 60 + d.getMinutes();
+  const toMin = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
+  const start = toMin(workStart);
+  const end = toMin(workEnd);
+  const dow = d.getDay();
+  if (start < end) return workDays.includes(dow) && mins >= start && mins < end;
+  if (mins >= start) return workDays.includes(dow);
+  return mins < end && workDays.includes((dow + 6) % 7);
+}
+
 const byUrgency = (a, b) =>
   PRIORITIES[a.task.priority].weight - PRIORITIES[b.task.priority].weight || a.due - b.due;
 
@@ -24,15 +38,22 @@ const byUrgency = (a, b) =>
  *   marquen como completadas (o se pospongan).
  * - Opcional: aviso previo X minutos antes.
  *
+ * - Fuera del horario laboral (si `isWorkTime` se indica) no se envía nada; las
+ *   actividades que sigan pendientes vuelven a insistir al iniciar el turno.
+ *
  * Los sistemas operativos limitan cuántas notificaciones locales puede tener
  * programadas una app (iOS: 64), por eso se planea una ventana de `limit`
  * avisos y la app la vuelve a planear cada vez que se abre o cambia algo.
  */
-export function planReminders(pending, { now, nagMinutes, preAlertMinutes, limit, horizonHours = 36 }) {
+export function planReminders(
+  pending,
+  { now, nagMinutes, preAlertMinutes, limit, horizonHours = 96, isWorkTime = () => true }
+) {
   const interval = nagMinutes * MIN;
   const horizon = now + horizonHours * 60 * MIN;
   const slots = new Map();
   const slot = (at) => {
+    if (!isWorkTime(at)) return { start: [], nag: [], pre: [] };
     if (!slots.has(at)) slots.set(at, { at, start: [], nag: [], pre: [] });
     return slots.get(at);
   };
@@ -44,12 +65,15 @@ export function planReminders(pending, { now, nagMinutes, preAlertMinutes, limit
     if (p.start > now && p.start <= horizon) slot(p.start).start.push(p);
   }
 
+  let nagSlots = 0;
   let t = nextTick(now, interval);
   while (t <= horizon) {
-    const overdue = pending.filter((p) => p.start < t);
+    const overdue = pending.filter((p) => p.start < t && t < (p.expiresAt ?? Infinity));
     if (overdue.length) {
-      slot(t).nag.push(...overdue);
-      if (slots.size >= limit * 2) break;
+      if (isWorkTime(t)) {
+        slot(t).nag.push(...overdue);
+        if (++nagSlots >= limit) break;
+      }
       t += interval;
     } else {
       const upcoming = pending.filter((p) => p.start >= t).map((p) => p.start);
