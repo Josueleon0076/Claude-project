@@ -1,5 +1,8 @@
 # Reloj Checador (App de asistencia con huella digital)
 
+> Este repositorio también incluye [`agenda/`](agenda/README.md): una agenda
+> para jefatura de cajas con recordatorios que insisten cada 5 minutos.
+
 Aplicación móvil que funciona como reloj checador: los empleados registran su
 **entrada** y **salida** confirmando su identidad con el **lector de huella
 digital** (o Face ID) del celular. Los registros se guardan primero en el

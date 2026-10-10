@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Agenda de Cajas",
+    "slug": "agenda-cajas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.agendacajas"
+    },
+    "android": {
+      "package": "com.example.agendacajas",
+      "permissions": ["SCHEDULE_EXACT_ALARM", "VIBRATE", "RECEIVE_BOOT_COMPLETED"],
+      "adaptiveIcon": {
+        "backgroundColor": "#4338CA",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "color": "#4338CA"
+        }
+      ]
+    ]
+  }
+}
