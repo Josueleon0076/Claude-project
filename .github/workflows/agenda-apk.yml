@@ -1,0 +1,69 @@
+name: Agenda de Cajas - APK
+
+# Compila el APK de Android de agenda/ y lo publica como Release del
+# repositorio para descargarlo directo en el teléfono.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'agenda/**'
+      - '.github/workflows/agenda-apk.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agenda-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: agenda
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: agenda/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Generar proyecto nativo
+        run: npx expo prebuild --platform android --no-install
+        env:
+          CI: 1
+
+      - name: Compilar APK
+        working-directory: agenda/android
+        run: ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
+
+      - name: Publicar Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="agenda-v1.0.${{ github.run_number }}"
+          cp android/app/build/outputs/apk/release/app-release.apk "AgendaDeCajas-${TAG}.apk"
+          gh release create "$TAG" "AgendaDeCajas-${TAG}.apk" \
+            --target "${{ github.sha }}" \
+            --title "Agenda de Cajas (build ${{ github.run_number }})" \
+            --notes "APK de Android. Ábrelo desde el teléfono para instalarlo (permite 'instalar apps desconocidas' si lo pide)." \
+            --prerelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agenda-apk
+          path: agenda/AgendaDeCajas-*.apk
