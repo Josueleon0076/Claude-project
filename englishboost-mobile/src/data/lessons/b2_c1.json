@@ -1,0 +1,172 @@
+[
+  {
+    "id": "b2-01",
+    "level": "B2-C1",
+    "title": "Meetings & project management",
+    "title_es": "Reuniones y gestión de proyectos",
+    "goal": "Dominar el vocabulario de sprints, stakeholders y reuniones para participar con seguridad.",
+    "vocabulary": [
+      {"word": "stakeholder", "translation": "parte interesada", "example": "We need sign-off from all stakeholders."},
+      {"word": "blocker", "translation": "impedimento / bloqueo", "example": "Do you have any blockers today?"},
+      {"word": "scope creep", "translation": "crecimiento descontrolado del alcance", "example": "Scope creep delayed the project by a month."},
+      {"word": "to prioritize", "translation": "priorizar", "example": "Let's prioritize the critical bugs."},
+      {"word": "action item", "translation": "tarea acordada (de una reunión)", "example": "I'll share the action items after the call."},
+      {"word": "bandwidth", "translation": "capacidad / disponibilidad", "example": "I don't have the bandwidth for another task this sprint."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-01-1", "type": "mcq", "topic": "meeting vocabulary",
+        "prompt": "In the daily stand-up: \"Yesterday I finished the login page. Today I'll work on the API. I don't have any ___.\"",
+        "options": ["blockers", "stoppers", "barriers", "locks"],
+        "answer": 0,
+        "explanation": "En metodologías ágiles, 'blocker' es cualquier impedimento que no te deja avanzar. La fórmula del stand-up es: yesterday / today / blockers."
+      },
+      {
+        "id": "b2-01-2", "type": "mcq", "topic": "project vocabulary",
+        "prompt": "The client keeps adding new features without changing the deadline. This is a classic case of ___.",
+        "options": ["scope creep", "feature drop", "deadline push", "overbooking"],
+        "answer": 0,
+        "explanation": "'Scope creep' es cuando el alcance del proyecto crece sin control (más requisitos con el mismo tiempo/presupuesto)."
+      },
+      {
+        "id": "b2-01-3", "type": "mcq", "topic": "diplomatic language",
+        "prompt": "¿Cuál es la forma más profesional de decir que no puedes asumir otra tarea?",
+        "options": ["I can't. I'm busy.", "No, that's not my job.", "I'm afraid I don't have the bandwidth this sprint, but I could pick it up next week.", "Ask someone else."],
+        "answer": 2,
+        "explanation": "En inglés profesional se suaviza el 'no': 'I'm afraid...', se da una razón ('bandwidth') y se propone una alternativa. Esto se percibe como colaborativo, no como un rechazo."
+      },
+      {
+        "id": "b2-01-4", "type": "fill", "topic": "meeting phrases",
+        "prompt": "Sorry to interrupt, but could I just ___ in here? (añadir algo rápido a una conversación)",
+        "answers": ["jump", "chime"],
+        "explanation": "'Jump in' / 'chime in' = intervenir en una conversación. 'Could I just jump in here?' es una forma educada de pedir la palabra en una llamada."
+      },
+      {
+        "id": "b2-01-5", "type": "translate", "topic": "meeting phrases",
+        "prompt": "Enviaré las tareas acordadas después de la llamada.",
+        "answers": ["I will send the action items after the call", "I'll send the action items after the call", "I will share the action items after the call", "I'll share the action items after the call", "I'll send out the action items after the call", "I will send out the action items after the call"],
+        "explanation": "'Action items' son las tareas concretas que salen de una reunión. En reuniones remotas se dice 'call' más que 'meeting' cuando es por videollamada."
+      },
+      {
+        "id": "b2-01-6", "type": "mcq", "topic": "meeting phrases",
+        "prompt": "Quieres retomar un tema en otro momento. Dices: \"Let's ___ this offline.\"",
+        "options": ["take", "put", "make", "do"],
+        "answer": 0,
+        "explanation": "'Let's take this offline' = hablémoslo aparte (fuera de esta reunión). Muy útil para no alargar reuniones con temas que solo afectan a dos personas."
+      }
+    ]
+  },
+  {
+    "id": "b2-02",
+    "level": "B2-C1",
+    "title": "Professional emails: tone & politeness",
+    "title_es": "Correos profesionales: tono y cortesía",
+    "goal": "Escribir correos y mensajes claros, cordiales y con el registro adecuado.",
+    "vocabulary": [
+      {"word": "to reach out", "translation": "contactar", "example": "I'm reaching out regarding the open position."},
+      {"word": "regarding", "translation": "con respecto a", "example": "I have a question regarding the invoice."},
+      {"word": "attached", "translation": "adjunto", "example": "Please find attached my resume."},
+      {"word": "at your earliest convenience", "translation": "en cuanto le sea posible", "example": "Please reply at your earliest convenience."},
+      {"word": "to clarify", "translation": "aclarar", "example": "Could you clarify the requirements?"}
+    ],
+    "exercises": [
+      {
+        "id": "b2-02-1", "type": "mcq", "topic": "email tone",
+        "prompt": "Elige la apertura más adecuada para escribir a un reclutador por primera vez:",
+        "options": ["Hey!! What's up?", "Dear Sir/Madam, I hereby write to you...", "Hi Sarah, I hope you're doing well. I'm reaching out regarding the Backend Developer role.", "Hello, give me information about the job."],
+        "answer": 2,
+        "explanation": "En el mundo tech internacional se prefiere un tono cordial pero directo: saludo con nombre + frase amable + motivo del correo. 'Dear Sir/Madam' suena anticuado y 'Hey!!' demasiado informal."
+      },
+      {
+        "id": "b2-02-2", "type": "mcq", "topic": "false friends",
+        "prompt": "\"I'm ___ to hear from you soon.\"",
+        "options": ["looking forward", "waiting anxious", "expecting impatient", "hoping forward"],
+        "answer": 0,
+        "explanation": "La fórmula de cierre estándar es 'I look forward to hearing from you' o 'I'm looking forward to hearing from you'. Ojo: después de 'look forward to' el verbo va en -ing."
+      },
+      {
+        "id": "b2-02-3", "type": "fill", "topic": "look forward to + -ing",
+        "prompt": "I look forward to ___ with you. (work)",
+        "answers": ["working"],
+        "explanation": "En 'look forward to', 'to' es preposición, no parte del infinitivo, así que el verbo siguiente va en -ing: 'look forward to working'."
+      },
+      {
+        "id": "b2-02-4", "type": "mcq", "topic": "polite requests",
+        "prompt": "¿Cuál es la forma más cortés de pedir algo a un cliente?",
+        "options": ["Send me the files.", "I need the files now.", "Could you please send me the files when you have a moment?", "You must send the files."],
+        "answer": 2,
+        "explanation": "Las peticiones con 'Could you please...?' + 'when you have a moment' suavizan el tono. Los imperativos directos ('Send me...') suenan bruscos en inglés profesional, aunque en español no lo parezcan."
+      },
+      {
+        "id": "b2-02-5", "type": "mcq", "topic": "false friends",
+        "prompt": "Quieres decir 'Actualmente trabajo en Globant'. Escribes:",
+        "options": ["Actually, I work at Globant.", "Currently, I work at Globant.", "Nowadays I am working in Globant actually.", "Actual I work at Globant."],
+        "answer": 1,
+        "explanation": "Falso amigo: 'actually' significa 'en realidad', NO 'actualmente'. 'Actualmente' = 'currently'. Y se trabaja 'at' una empresa."
+      },
+      {
+        "id": "b2-02-6", "type": "translate", "topic": "email phrases",
+        "prompt": "Adjunto encontrará mi currículum.",
+        "answers": ["Please find attached my resume", "Please find my resume attached", "I have attached my resume", "I've attached my resume", "Please find attached my CV", "Please find my CV attached", "I have attached my CV", "I've attached my CV", "Attached is my resume", "Attached is my CV"],
+        "explanation": "Fórmulas comunes: 'Please find attached...' (formal) o 'I've attached my resume' (más moderno y natural). En EE. UU. se dice 'resume'; en Reino Unido/Europa, 'CV'."
+      }
+    ]
+  },
+  {
+    "id": "b2-03",
+    "level": "B2-C1",
+    "title": "Interviews: describing achievements (STAR)",
+    "title_es": "Entrevistas: describir logros (método STAR)",
+    "goal": "Contar tus logros con estructura STAR, verbos de acción y resultados medibles.",
+    "vocabulary": [
+      {"word": "to lead", "translation": "liderar", "example": "I led a team of four engineers."},
+      {"word": "to streamline", "translation": "optimizar / simplificar", "example": "I streamlined the onboarding process."},
+      {"word": "outcome", "translation": "resultado", "example": "The outcome was a 30% increase in sales."},
+      {"word": "challenge", "translation": "reto / desafío", "example": "The biggest challenge was the tight deadline."},
+      {"word": "to reduce", "translation": "reducir", "example": "We reduced load time by 40%."},
+      {"word": "ownership", "translation": "responsabilidad / sentido de propiedad", "example": "I took ownership of the migration."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-03-1", "type": "mcq", "topic": "STAR method",
+        "prompt": "En el método STAR, ¿qué significa la 'A'?",
+        "options": ["Answer", "Action: lo que TÚ hiciste concretamente", "Achievement", "Analysis"],
+        "answer": 1,
+        "explanation": "STAR = Situation (contexto), Task (tu responsabilidad), Action (lo que TÚ hiciste, usa 'I' no 'we'), Result (resultado, idealmente con números)."
+      },
+      {
+        "id": "b2-03-2", "type": "mcq", "topic": "action verbs",
+        "prompt": "¿Qué frase suena más fuerte en una entrevista?",
+        "options": ["I was responsible for doing some improvements in the database.", "I optimized our database queries, which reduced response time by 40%.", "I did things with the database.", "The database was improved by the team."],
+        "answer": 1,
+        "explanation": "Usa verbos de acción en pasado (optimized, led, built, reduced) + resultado medible. Evita la voz pasiva y frases vagas como 'was responsible for'."
+      },
+      {
+        "id": "b2-03-3", "type": "fill", "topic": "past simple for achievements",
+        "prompt": "In my last role, I ___ a team of five developers. (lead)",
+        "answers": ["led"],
+        "explanation": "'Lead' es irregular: lead → led → led. Muy usado en entrevistas: 'I led the migration to AWS'."
+      },
+      {
+        "id": "b2-03-4", "type": "mcq", "topic": "prepositions with numbers",
+        "prompt": "We reduced costs ___ 25%.",
+        "options": ["in", "by", "on", "with"],
+        "answer": 1,
+        "explanation": "Para expresar cuánto cambió algo se usa 'by': 'increased by 25%', 'reduced by half'. 'To' indica el valor final: 'reduced from 10s to 2s'."
+      },
+      {
+        "id": "b2-03-5", "type": "reorder", "topic": "interview phrases",
+        "words": ["ownership", "took", "I", "of", "migration", "the"],
+        "answer": "I took ownership of the migration",
+        "explanation": "'Take ownership of' = asumir la responsabilidad completa de algo. Es una frase muy valorada por empresas remotas porque demuestra autonomía."
+      },
+      {
+        "id": "b2-03-6", "type": "mcq", "topic": "interview phrases",
+        "prompt": "El entrevistador pregunta \"What's your biggest weakness?\". ¿Cuál es la mejor estructura?",
+        "options": ["\"I don't have weaknesses.\"", "\"I'm a perfectionist.\" (y nada más)", "Una debilidad real + lo que estás haciendo para mejorarla + un ejemplo de progreso", "Cambiar de tema"],
+        "answer": 2,
+        "explanation": "Los reclutadores buscan autoconciencia. Ejemplo: 'Public speaking used to be hard for me, so I started presenting in our weekly demos. Now I feel much more confident.'"
+      }
+    ]
+  }
+]

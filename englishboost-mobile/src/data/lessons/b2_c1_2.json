@@ -1,0 +1,225 @@
+[
+  {
+    "id": "b2-04",
+    "level": "B2-C1",
+    "title": "Giving feedback & disagreeing politely",
+    "title_es": "Dar feedback y discrepar con diplomacia",
+    "goal": "Hacer code reviews, opinar y discrepar sin sonar brusco.",
+    "vocabulary": [
+      {"word": "to suggest", "translation": "sugerir", "example": "I'd suggest adding a test here."},
+      {"word": "concern", "translation": "preocupación / inquietud", "example": "My main concern is performance."},
+      {"word": "trade-off", "translation": "compromiso / pros y contras", "example": "There's a trade-off between speed and cost."},
+      {"word": "to push back", "translation": "oponerse / cuestionar (con respeto)", "example": "It's OK to push back on unrealistic deadlines."},
+      {"word": "nitpick (nit)", "translation": "detalle menor", "example": "Just a nit: rename this variable."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-04-1", "type": "mcq", "topic": "polite disagreement",
+        "prompt": "¿Cuál es la forma más diplomática de discrepar en una reunión?",
+        "options": ["You're wrong.", "That's a bad idea.", "I see your point, but I'm not sure that would scale. What if we tried a queue instead?", "No. We should use a queue."],
+        "answer": 2,
+        "explanation": "Fórmula para discrepar: reconocer la idea ('I see your point') + duda suavizada ('I'm not sure...') + alternativa en forma de pregunta ('What if we...?')."
+      },
+      {
+        "id": "b2-04-2", "type": "mcq", "topic": "code review language",
+        "prompt": "Comentario en un pull request. ¿Cuál suena más profesional?",
+        "options": ["This code is terrible.", "Why did you do this?", "Nice work! One suggestion: could we extract this logic into a helper to make it easier to test?", "Change this."],
+        "answer": 2,
+        "explanation": "En code reviews se critica el código, no a la persona. Empieza con algo positivo y formula los cambios como sugerencias o preguntas: 'could we...?', 'what do you think about...?'."
+      },
+      {
+        "id": "b2-04-3", "type": "fill", "topic": "softening language",
+        "prompt": "I ___ suggest adding more tests before we merge. (forma suave de 'sugiero')",
+        "answers": ["would"],
+        "explanation": "'I would suggest' / 'I'd suggest' suena más suave que 'I suggest' o 'You must'. 'Would' es el gran suavizador del inglés profesional."
+      },
+      {
+        "id": "b2-04-4", "type": "mcq", "topic": "meeting vocabulary",
+        "prompt": "\"Using a managed database is faster to set up, but it's more expensive. It's a ___.\"",
+        "options": ["trade-off", "drawback-up", "pros and contra", "deal-break"],
+        "answer": 0,
+        "explanation": "'Trade-off' = elegir algo implica sacrificar otra cosa. Palabra muy común en discusiones técnicas y de producto."
+      },
+      {
+        "id": "b2-04-5", "type": "translate", "topic": "softening language",
+        "prompt": "Mi principal preocupación es el rendimiento.",
+        "answers": ["My main concern is performance", "My main concern is the performance", "My biggest concern is performance"],
+        "explanation": "'Concern' (preocupación) es la forma profesional de señalar un riesgo sin sonar negativo. Ojo: 'performance' = rendimiento, no 'presentación'."
+      },
+      {
+        "id": "b2-04-6", "type": "mcq", "topic": "giving positive feedback",
+        "prompt": "Quieres reconocer el trabajo de una compañera frente al equipo:",
+        "options": ["Good.", "Huge shout-out to Laura for fixing the checkout bug so quickly. It saved us a lot of headaches!", "Laura did her job.", "Thanks I guess."],
+        "answer": 1,
+        "explanation": "'Shout-out to [name] for [acción concreta]' es la forma típica de reconocer públicamente en Slack o reuniones. Ser específico hace que el reconocimiento tenga más valor."
+      }
+    ]
+  },
+  {
+    "id": "b2-05",
+    "level": "B2-C1",
+    "title": "Explaining & presenting technical ideas",
+    "title_es": "Explicar y presentar ideas técnicas",
+    "goal": "Estructurar una explicación o demo con conectores claros.",
+    "vocabulary": [
+      {"word": "to walk (someone) through", "translation": "explicar paso a paso", "example": "Let me walk you through the architecture."},
+      {"word": "however", "translation": "sin embargo", "example": "It's fast. However, it uses a lot of memory."},
+      {"word": "therefore", "translation": "por lo tanto", "example": "The tests failed; therefore, we paused the release."},
+      {"word": "bottleneck", "translation": "cuello de botella", "example": "The database is the main bottleneck."},
+      {"word": "to wrap up", "translation": "concluir / cerrar", "example": "To wrap up, let's review the next steps."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-05-1", "type": "mcq", "topic": "presentation phrases",
+        "prompt": "Para empezar una demo: \"Let me ___ you through the new dashboard.\"",
+        "options": ["walk", "go", "pass", "take on"],
+        "answer": 0,
+        "explanation": "'Walk someone through something' = explicar algo paso a paso. Es la frase estándar para empezar demos y explicaciones."
+      },
+      {
+        "id": "b2-05-2", "type": "mcq", "topic": "linking words",
+        "prompt": "The new approach is faster. ___, it requires more memory.",
+        "options": ["Therefore", "However", "Moreover", "Because"],
+        "answer": 1,
+        "explanation": "'However' introduce un contraste (sin embargo). 'Therefore' = por lo tanto (consecuencia); 'Moreover' = además (añade)."
+      },
+      {
+        "id": "b2-05-3", "type": "mcq", "topic": "linking words",
+        "prompt": "The tests failed; ___, we postponed the release.",
+        "options": ["however", "although", "therefore", "despite"],
+        "answer": 2,
+        "explanation": "'Therefore' expresa consecuencia: los tests fallaron → por lo tanto, se pospuso. Va seguido de coma en este uso."
+      },
+      {
+        "id": "b2-05-4", "type": "fill", "topic": "although / despite",
+        "prompt": "___ the tight deadline, we delivered on time. (A pesar de + sustantivo)",
+        "answers": ["despite", "in spite of"],
+        "explanation": "'Despite' / 'In spite of' + sustantivo o -ing. 'Although' + oración completa: 'Although the deadline was tight, we delivered on time'."
+      },
+      {
+        "id": "b2-05-5", "type": "translate", "topic": "technical vocabulary",
+        "prompt": "La base de datos es el principal cuello de botella.",
+        "answers": ["The database is the main bottleneck", "The database is the biggest bottleneck"],
+        "explanation": "'Bottleneck' = cuello de botella: el punto que limita el rendimiento de todo el sistema."
+      },
+      {
+        "id": "b2-05-6", "type": "reorder", "topic": "presentation phrases",
+        "words": ["up,", "To", "wrap", "the", "let's", "review", "steps", "next"],
+        "answer": "To wrap up, let's review the next steps",
+        "explanation": "'To wrap up' = para cerrar. Terminar con 'next steps' (próximos pasos) deja claro qué pasa después de la reunión."
+      }
+    ]
+  },
+  {
+    "id": "b2-06",
+    "level": "B2-C1",
+    "title": "Negotiating salary & job offers",
+    "title_es": "Negociar salario y ofertas de trabajo",
+    "goal": "Hablar de expectativas salariales, beneficios y condiciones con seguridad.",
+    "vocabulary": [
+      {"word": "salary expectations", "translation": "expectativas salariales", "example": "What are your salary expectations?"},
+      {"word": "benefits", "translation": "prestaciones / beneficios", "example": "The benefits include health insurance."},
+      {"word": "contractor", "translation": "contratista independiente", "example": "I'd be working as a contractor."},
+      {"word": "full-time employee", "translation": "empleado de tiempo completo", "example": "Is this a full-time employee position?"},
+      {"word": "to negotiate", "translation": "negociar", "example": "Is the salary negotiable?"},
+      {"word": "counteroffer", "translation": "contraoferta", "example": "I'd like to make a counteroffer."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-06-1", "type": "mcq", "topic": "salary negotiation",
+        "prompt": "\"What are your salary expectations?\" — ¿Cuál es la respuesta más estratégica?",
+        "options": ["Whatever you want to pay.", "I don't know.", "Based on my research and experience, I'm looking for something in the range of $4,000 to $4,800 per month, depending on the full package.", "A lot of money."],
+        "answer": 2,
+        "explanation": "Da un rango basado en investigación ('Based on my research...') y deja espacio para negociar ('depending on the full package'). Nunca digas 'whatever'."
+      },
+      {
+        "id": "b2-06-2", "type": "mcq", "topic": "salary negotiation",
+        "prompt": "Te ofrecen menos de lo esperado. ¿Qué dices?",
+        "options": ["That's too low, goodbye.", "Thank you for the offer, I'm really excited about the role. Is there any flexibility on the base salary?", "OK, I accept anything.", "You are not fair."],
+        "answer": 1,
+        "explanation": "Agradece, muestra entusiasmo y pregunta por flexibilidad: 'Is there any flexibility on...?' es la pregunta clave para negociar sin confrontar."
+      },
+      {
+        "id": "b2-06-3", "type": "fill", "topic": "job offer vocabulary",
+        "prompt": "Will I be a full-time employee or an independent ___? (contratista)",
+        "answers": ["contractor"],
+        "explanation": "'Contractor' = trabajas por contrato (sueles facturar y pagar tus impuestos). 'Full-time employee' = empleado con prestaciones. Pregúntalo siempre en ofertas remotas."
+      },
+      {
+        "id": "b2-06-4", "type": "mcq", "topic": "job offer vocabulary",
+        "prompt": "\"The package includes PTO, health insurance and a home-office stipend.\" ¿Qué es PTO?",
+        "options": ["Pago por tiempo extra", "Días de vacaciones / tiempo libre pagado", "Un bono anual", "Plan de pensiones"],
+        "answer": 1,
+        "explanation": "PTO = Paid Time Off (vacaciones/días libres pagados). 'Stipend' = asignación de dinero para algo específico, como equipar tu oficina en casa."
+      },
+      {
+        "id": "b2-06-5", "type": "translate", "topic": "salary negotiation",
+        "prompt": "¿El salario es negociable?",
+        "answers": ["Is the salary negotiable"],
+        "explanation": "'Negotiable' = negociable. Pregunta con 'to be': 'Is the salary negotiable?'."
+      },
+      {
+        "id": "b2-06-6", "type": "mcq", "topic": "polite requests (would)",
+        "prompt": "Necesitas tiempo para decidir. Dices:",
+        "options": ["Wait.", "I would appreciate a couple of days to review the offer in detail.", "Give me time.", "I will think, maybe."],
+        "answer": 1,
+        "explanation": "'I would appreciate...' es una forma muy profesional de pedir algo. Pedir 1-3 días para revisar una oferta es normal y bien visto."
+      }
+    ]
+  },
+  {
+    "id": "b2-07",
+    "level": "B2-C1",
+    "title": "Advanced grammar: third conditional, wish & regrets",
+    "title_es": "Gramática avanzada: tercer condicional, wish y lamentos",
+    "goal": "Hablar de lo que pudo haber pasado y analizar errores en retrospectivas.",
+    "vocabulary": [
+      {"word": "retrospective", "translation": "retrospectiva (reunión de análisis)", "example": "We discuss lessons learned in the retrospective."},
+      {"word": "in hindsight", "translation": "en retrospectiva / visto ahora", "example": "In hindsight, we should have tested more."},
+      {"word": "to anticipate", "translation": "prever / anticipar", "example": "We didn't anticipate the traffic spike."},
+      {"word": "lesson learned", "translation": "lección aprendida", "example": "The main lesson learned was to communicate earlier."},
+      {"word": "to overlook", "translation": "pasar por alto", "example": "We overlooked a small detail."}
+    ],
+    "exercises": [
+      {
+        "id": "b2-07-1", "type": "mcq", "topic": "third conditional",
+        "prompt": "If we ___ more tests, we would have caught the bug.",
+        "options": ["wrote", "had written", "would write", "have written"],
+        "answer": 1,
+        "explanation": "3er condicional (pasado irreal): If + had + participio, would have + participio. 'If we had written more tests, we would have caught the bug'."
+      },
+      {
+        "id": "b2-07-2", "type": "fill", "topic": "third conditional",
+        "prompt": "If she had asked for help, she ___ have finished earlier. (condicional)",
+        "answers": ["would", "could", "might"],
+        "explanation": "En la segunda parte del 3er condicional va would / could / might + have + participio."
+      },
+      {
+        "id": "b2-07-3", "type": "mcq", "topic": "should have + participle",
+        "prompt": "In hindsight, we ___ the client earlier.",
+        "options": ["should inform", "should have informed", "should informed", "must informed"],
+        "answer": 1,
+        "explanation": "'Should have' + participio = lamentar algo del pasado (debimos haber...). Muy usado en retrospectivas: 'We should have communicated earlier'."
+      },
+      {
+        "id": "b2-07-4", "type": "mcq", "topic": "wish",
+        "prompt": "I wish I ___ more time to prepare for the interview yesterday.",
+        "options": ["have", "had", "had had", "would have"],
+        "answer": 2,
+        "explanation": "'Wish' + past perfect (had + participio) = lamento sobre el pasado. Para el presente: 'I wish I had more time (now)'."
+      },
+      {
+        "id": "b2-07-5", "type": "translate", "topic": "should have + participle",
+        "prompt": "Deberíamos haber probado más.",
+        "answers": ["We should have tested more", "We should've tested more"],
+        "explanation": "'Deberíamos haber + participio' = 'should have + participio'. Al hablar suena como 'should've', ¡pero nunca se escribe 'should of'!"
+      },
+      {
+        "id": "b2-07-6", "type": "reorder", "topic": "third conditional",
+        "words": ["have", "would", "We", "missed", "deadline", "the"],
+        "answer": "We would have missed the deadline",
+        "explanation": "Resultado del 3er condicional: sujeto + would have + participio. Ejemplo completo: 'If Ana hadn't helped, we would have missed the deadline'."
+      }
+    ]
+  }
+]

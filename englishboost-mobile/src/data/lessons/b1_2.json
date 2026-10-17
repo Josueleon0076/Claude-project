@@ -1,0 +1,227 @@
+[
+  {
+    "id": "b1-04",
+    "level": "B1",
+    "title": "Past continuous vs past simple",
+    "title_es": "Pasado continuo vs pasado simple",
+    "goal": "Contar incidentes e historias: qué estaba pasando cuando ocurrió algo.",
+    "vocabulary": [
+      {"word": "while", "translation": "mientras", "example": "The server crashed while I was deploying."},
+      {"word": "to crash", "translation": "fallar / colgarse", "example": "The app crashed during the demo."},
+      {"word": "suddenly", "translation": "de repente", "example": "Suddenly, the connection dropped."},
+      {"word": "incident", "translation": "incidente", "example": "We wrote a report about the incident."},
+      {"word": "to notice", "translation": "darse cuenta / notar", "example": "I noticed the error in the logs."}
+    ],
+    "exercises": [
+      {
+        "id": "b1-04-1", "type": "mcq", "topic": "past continuous vs past simple",
+        "prompt": "I ___ the database when the power went out.",
+        "options": ["updated", "was updating", "am updating", "have updated"],
+        "answer": 1,
+        "explanation": "Pasado continuo (was/were + -ing) = acción larga en progreso. Pasado simple = acción corta que la interrumpe: 'I was updating... when the power went out'."
+      },
+      {
+        "id": "b1-04-2", "type": "fill", "topic": "past continuous form",
+        "prompt": "They ___ testing the app when we called. (to be, pasado)",
+        "answers": ["were"],
+        "explanation": "Pasado de 'to be': 'was' con I / he / she / it y 'were' con you / we / they → 'they were testing'."
+      },
+      {
+        "id": "b1-04-3", "type": "mcq", "topic": "while / when",
+        "prompt": "___ I was presenting, my internet connection dropped.",
+        "options": ["While", "During", "Meanwhile", "For"],
+        "answer": 0,
+        "explanation": "'While' + oración (sujeto + verbo). 'During' + sustantivo: 'during the presentation'. Error típico: 'during I was presenting'."
+      },
+      {
+        "id": "b1-04-4", "type": "translate", "topic": "past continuous vs past simple",
+        "prompt": "Estaba revisando los logs cuando noté el error.",
+        "answers": ["I was checking the logs when I noticed the error", "I was reviewing the logs when I noticed the error", "I was looking at the logs when I noticed the error"],
+        "explanation": "'Estaba revisando' = 'was checking' (en progreso); 'noté' = 'noticed' (acción puntual). Ambos sujetos se repiten en inglés: 'I was..., when I noticed'."
+      },
+      {
+        "id": "b1-04-5", "type": "reading", "topic": "reading comprehension",
+        "passage": "Incident summary: On Tuesday at 10:15, while the team was running a database migration, the payment service stopped responding. Ana noticed the alerts and paused the migration. The service recovered at 10:40. Root cause: the migration was locking a table that the payment service needed.",
+        "prompt": "¿Qué estaba haciendo el equipo cuando falló el servicio?",
+        "options": ["Revisando alertas", "Ejecutando una migración de base de datos", "Desplegando el servicio de pagos", "Escribiendo el reporte"],
+        "answer": 1,
+        "explanation": "'While the team was running a database migration' = mientras el equipo estaba ejecutando una migración. El pasado continuo describe la acción de fondo."
+      },
+      {
+        "id": "b1-04-6", "type": "reading", "topic": "reading comprehension",
+        "passage": "Incident summary: On Tuesday at 10:15, while the team was running a database migration, the payment service stopped responding. Ana noticed the alerts and paused the migration. The service recovered at 10:40. Root cause: the migration was locking a table that the payment service needed.",
+        "prompt": "¿Cuál fue la causa raíz (root cause)?",
+        "options": ["Ana pausó la migración", "Se cayó internet", "La migración bloqueaba una tabla que necesitaba el servicio de pagos", "El servicio de pagos tenía un bug"],
+        "answer": 2,
+        "explanation": "'The migration was locking a table that the payment service needed'. 'Root cause' es un término clave en reportes de incidentes (post-mortems)."
+      }
+    ]
+  },
+  {
+    "id": "b1-05",
+    "level": "B1",
+    "title": "Gerunds vs infinitives",
+    "title_es": "Gerundio (-ing) vs infinitivo (to + verbo)",
+    "goal": "Saber qué forma va después de verbos como enjoy, want, avoid o decide.",
+    "vocabulary": [
+      {"word": "to enjoy", "translation": "disfrutar", "example": "I enjoy solving problems."},
+      {"word": "to avoid", "translation": "evitar", "example": "Avoid sending emails late at night."},
+      {"word": "to decide", "translation": "decidir", "example": "We decided to use React."},
+      {"word": "to be used to", "translation": "estar acostumbrado a", "example": "I'm used to working with US teams."},
+      {"word": "to consider", "translation": "considerar", "example": "Have you considered moving abroad?"}
+    ],
+    "exercises": [
+      {
+        "id": "b1-05-1", "type": "mcq", "topic": "verb + -ing",
+        "prompt": "I really enjoy ___ with international teams.",
+        "options": ["to work", "working", "work", "worked"],
+        "answer": 1,
+        "explanation": "Después de enjoy, avoid, finish, consider, mind y suggest va -ing: 'I enjoy working'."
+      },
+      {
+        "id": "b1-05-2", "type": "mcq", "topic": "verb + to infinitive",
+        "prompt": "We decided ___ the launch until Monday.",
+        "options": ["postponing", "to postpone", "postpone", "for postpone"],
+        "answer": 1,
+        "explanation": "Después de decide, want, plan, need, hope, agree y offer va 'to' + verbo: 'We decided to postpone'."
+      },
+      {
+        "id": "b1-05-3", "type": "fill", "topic": "preposition + -ing",
+        "prompt": "I'm interested in ___ more about your company. (learn)",
+        "answers": ["learning"],
+        "explanation": "Después de cualquier preposición (in, about, of, for, at, without) el verbo va en -ing: 'interested in learning', 'good at solving'."
+      },
+      {
+        "id": "b1-05-4", "type": "mcq", "topic": "be used to + -ing",
+        "prompt": "I'm used to ___ early because of the time difference.",
+        "options": ["wake up", "waking up", "woke up", "be waking"],
+        "answer": 1,
+        "explanation": "'Be used to' = estar acostumbrado a, y aquí 'to' es preposición → -ing: 'I'm used to waking up early'. No confundir con 'used to + verbo' (solía)."
+      },
+      {
+        "id": "b1-05-5", "type": "translate", "topic": "verb + -ing",
+        "prompt": "Evita enviar correos largos.",
+        "answers": ["Avoid sending long emails", "Avoid sending long e-mails"],
+        "explanation": "'Avoid' + -ing: 'Avoid sending'. Y el adjetivo va antes del sustantivo: 'long emails'."
+      },
+      {
+        "id": "b1-05-6", "type": "mcq", "topic": "stop + -ing vs stop + to",
+        "prompt": "\"I stopped to check my email\" significa...",
+        "options": ["Dejé de revisar mi correo", "Me detuve (paré lo que hacía) para revisar mi correo", "Nunca reviso mi correo", "Revisé mi correo sin parar"],
+        "answer": 1,
+        "explanation": "'Stop + to' = parar PARA hacer algo. 'Stop + -ing' = dejar de hacer algo: 'I stopped checking my email' = dejé de revisarlo."
+      }
+    ]
+  },
+  {
+    "id": "b1-06",
+    "level": "B1",
+    "title": "The passive voice",
+    "title_es": "La voz pasiva",
+    "goal": "Describir procesos y resultados cuando importa la acción más que quién la hizo.",
+    "vocabulary": [
+      {"word": "to approve", "translation": "aprobar", "example": "The budget was approved yesterday."},
+      {"word": "to release", "translation": "lanzar / publicar", "example": "Version 2.0 will be released in May."},
+      {"word": "to store", "translation": "almacenar", "example": "The data is stored in the cloud."},
+      {"word": "requirement", "translation": "requisito", "example": "The requirements were changed."},
+      {"word": "to assign", "translation": "asignar", "example": "The ticket was assigned to me."}
+    ],
+    "exercises": [
+      {
+        "id": "b1-06-1", "type": "mcq", "topic": "passive present",
+        "prompt": "All user data ___ in encrypted form.",
+        "options": ["stores", "is stored", "is storing", "stored"],
+        "answer": 1,
+        "explanation": "Voz pasiva = to be + participio. En presente: 'is stored' (se almacena). Se usa mucho en documentación técnica."
+      },
+      {
+        "id": "b1-06-2", "type": "fill", "topic": "passive past",
+        "prompt": "The ticket ___ assigned to me yesterday. (to be, pasado)",
+        "answers": ["was"],
+        "explanation": "Pasiva en pasado: was / were + participio. 'The ticket was assigned to me' (me asignaron el ticket)."
+      },
+      {
+        "id": "b1-06-3", "type": "translate", "topic": "passive past",
+        "prompt": "El presupuesto fue aprobado ayer.",
+        "answers": ["The budget was approved yesterday", "Yesterday the budget was approved", "Yesterday, the budget was approved"],
+        "explanation": "'Fue aprobado' = 'was approved'. Estructura: sujeto + was/were + participio."
+      },
+      {
+        "id": "b1-06-4", "type": "mcq", "topic": "passive future",
+        "prompt": "The new version ___ next month.",
+        "options": ["will release", "will be released", "is release", "will released"],
+        "answer": 1,
+        "explanation": "Pasiva en futuro: will be + participio. La versión no se lanza a sí misma, alguien la lanza → 'will be released'."
+      },
+      {
+        "id": "b1-06-5", "type": "mcq", "topic": "se impersonal → passive",
+        "prompt": "¿Cómo se dice 'Se habla inglés en todas las reuniones'?",
+        "options": ["It speaks English in all meetings.", "English is spoken in all meetings.", "Is spoken English in all meetings.", "English speaks in all meetings."],
+        "answer": 1,
+        "explanation": "El 'se' impersonal del español suele traducirse con voz pasiva: 'English is spoken...'. 'It speaks' significaría que 'algo' habla."
+      },
+      {
+        "id": "b1-06-6", "type": "reorder", "topic": "passive present perfect",
+        "words": ["been", "requirements", "The", "have", "changed"],
+        "answer": "The requirements have been changed",
+        "explanation": "Pasiva en presente perfecto: have / has + been + participio. 'The requirements have been changed' (han cambiado los requisitos)."
+      }
+    ]
+  },
+  {
+    "id": "b1-07",
+    "level": "B1",
+    "title": "Relative clauses & reported speech",
+    "title_es": "Oraciones de relativo y estilo indirecto",
+    "goal": "Dar más detalle con who / which / that y contar lo que otra persona dijo.",
+    "vocabulary": [
+      {"word": "who", "translation": "que / quien (personas)", "example": "She's the engineer who built the API."},
+      {"word": "which", "translation": "que / el cual (cosas)", "example": "The tool, which is free, works well."},
+      {"word": "to mention", "translation": "mencionar", "example": "He mentioned that the deadline changed."},
+      {"word": "to tell", "translation": "decir (a alguien)", "example": "She told me she was busy."},
+      {"word": "to explain", "translation": "explicar", "example": "Can you explain how it works?"}
+    ],
+    "exercises": [
+      {
+        "id": "b1-07-1", "type": "mcq", "topic": "relative pronouns",
+        "prompt": "We need someone ___ has experience with AWS.",
+        "options": ["which", "who", "what", "where"],
+        "answer": 1,
+        "explanation": "'Who' para personas, 'which' para cosas, 'that' para ambas (en oraciones sin comas). 'What' NO es pronombre relativo: 'someone what...' es un error típico."
+      },
+      {
+        "id": "b1-07-2", "type": "mcq", "topic": "relative pronouns",
+        "prompt": "This is the library ___ we use for testing.",
+        "options": ["who", "that", "what", "whose"],
+        "answer": 1,
+        "explanation": "Para cosas: 'that' o 'which'. En este tipo de frase también se puede omitir: 'This is the library we use for testing'."
+      },
+      {
+        "id": "b1-07-3", "type": "mcq", "topic": "say vs tell",
+        "prompt": "She ___ me that the client was happy.",
+        "options": ["said", "told", "say", "talked"],
+        "answer": 1,
+        "explanation": "'Tell' necesita a la persona: 'told ME'. 'Say' no: 'she said (that)...'. Incorrecto: 'she said me'."
+      },
+      {
+        "id": "b1-07-4", "type": "fill", "topic": "reported speech",
+        "prompt": "Direct: \"I am busy.\" → Reported: He said he ___ busy. (to be)",
+        "answers": ["was"],
+        "explanation": "En estilo indirecto el verbo suele 'retroceder' un tiempo: am / is → was, will → would, can → could."
+      },
+      {
+        "id": "b1-07-5", "type": "mcq", "topic": "reported speech",
+        "prompt": "Direct: \"We will send the files tomorrow.\" → They said they ___ the files the next day.",
+        "options": ["will send", "would send", "sent", "send"],
+        "answer": 1,
+        "explanation": "'Will' pasa a 'would' en estilo indirecto. También cambian las referencias de tiempo: tomorrow → the next day."
+      },
+      {
+        "id": "b1-07-6", "type": "translate", "topic": "relative pronouns",
+        "prompt": "Ella es la ingeniera que construyó la API.",
+        "answers": ["She is the engineer who built the API", "She's the engineer who built the API", "She is the engineer that built the API", "She's the engineer that built the API"],
+        "explanation": "Para personas: 'who' (o 'that'). 'Construyó' = 'built' (pasado irregular de 'build')."
+      }
+    ]
+  }
+]
