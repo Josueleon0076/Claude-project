@@ -1,0 +1,58 @@
+[
+  {
+    "id": "int-01", "category": "Intro",
+    "question": "Tell me about yourself.",
+    "tip_es": "Usa la fórmula Presente → Pasado → Futuro: qué haces hoy, qué experiencia relevante tienes y por qué te interesa este puesto. 60-90 segundos, sin contar tu vida personal.",
+    "keywords": ["currently", "experience", "years", "worked", "interested", "role"],
+    "sample": "I'm a backend developer with four years of experience building APIs in Python. Currently I work at a fintech startup, where I led the migration of our payment service to AWS. I'm looking for a remote role where I can keep growing in distributed systems, and your team's work on real-time data really caught my attention."
+  },
+  {
+    "id": "int-02", "category": "Behavioral (STAR)",
+    "question": "Tell me about a time you faced a difficult challenge at work. How did you handle it?",
+    "tip_es": "Método STAR: Situation, Task, Action (lo que TÚ hiciste, usa 'I'), Result (con números si puedes). Narra en pasado simple.",
+    "keywords": ["situation", "i decided", "i ", "result", "learned", "%"],
+    "sample": "Last year our main API started timing out during peak hours (Situation). As the on-call engineer, I had to find the root cause quickly (Task). I profiled the slow endpoints, found an N+1 query problem and added caching with Redis (Action). Response times dropped by 60% and we had zero timeouts the following month (Result)."
+  },
+  {
+    "id": "int-03", "category": "Behavioral (STAR)",
+    "question": "Describe a situation where you disagreed with a teammate. What did you do?",
+    "tip_es": "Muestra madurez: escuchaste, usaste datos y llegaron a un acuerdo. Evita culpar a la otra persona. Frases útiles: 'I understood their point', 'we agreed to...'.",
+    "keywords": ["disagreed", "listened", "data", "agreed", "compromise", "result"],
+    "sample": "A teammate wanted to rewrite a module from scratch, while I preferred refactoring it step by step. I listened to his concerns and suggested we compare both options with a quick estimate. The data showed that refactoring was three times faster, so we agreed to refactor first and revisit the rewrite later. We delivered on time and kept a good relationship."
+  },
+  {
+    "id": "int-04", "category": "Remote work",
+    "question": "How do you stay productive and communicate effectively when working remotely?",
+    "tip_es": "Habla de hábitos concretos: comunicación asíncrona, actualizaciones proactivas, herramientas (Slack, Jira, Notion) y gestión de zonas horarias.",
+    "keywords": ["async", "asynchronous", "time zone", "proactive", "update", "slack", "jira", "document"],
+    "sample": "I rely on clear asynchronous communication. I post a short update every morning with my priorities and blockers, and I document decisions in Notion so people in other time zones can catch up. I also block focus time in my calendar and I'm proactive about asking questions early instead of waiting."
+  },
+  {
+    "id": "int-05", "category": "Behavioral (STAR)",
+    "question": "Tell me about a mistake you made and what you learned from it.",
+    "tip_es": "Elige un error real pero no catastrófico. Lo importante es la lección y el cambio en tu forma de trabajar. Usa 'I learned that...' y 'Since then, I...'.",
+    "keywords": ["mistake", "learned", "since then", "now i", "took responsibility"],
+    "sample": "Early in my career I deployed a change on a Friday without enough testing, and it broke the checkout page for an hour. I took responsibility, rolled back the change and wrote a post-mortem. I learned the value of automated tests and staged rollouts. Since then, I always add tests before deploying and I avoid risky releases right before the weekend."
+  },
+  {
+    "id": "int-06", "category": "Technical",
+    "question": "Can you explain a technical project you're proud of to a non-technical person?",
+    "tip_es": "Evalúan claridad. Evita la jerga, usa analogías simples y enfócate en el impacto para el usuario o el negocio.",
+    "keywords": ["users", "helped", "simple", "like", "business", "impact"],
+    "sample": "I built a tool that automatically sorts customer support emails. Think of it like a smart mail room: instead of a person reading every message, the system reads it and sends it to the right team. As a result, customers got answers twice as fast and the support team saved about ten hours a week."
+  },
+  {
+    "id": "int-07", "category": "Closing",
+    "question": "Why do you want to work with us?",
+    "tip_es": "Investiga la empresa. Conecta tus habilidades con su misión, producto o cultura. Evita respuestas genéricas como 'because it's a good company'.",
+    "keywords": ["your", "mission", "product", "culture", "skills", "contribute"],
+    "sample": "I've been following your product for a while, and I really like how you focus on developer experience. My background in building internal tools fits well with your platform team, and I'm excited about contributing to a company with a strong remote-first culture."
+  },
+  {
+    "id": "int-08", "category": "Closing",
+    "question": "Do you have any questions for us?",
+    "tip_es": "¡Siempre ten 2-3 preguntas! Sobre el equipo, el proceso de trabajo o cómo se mide el éxito. Nunca digas solo 'No, thanks'.",
+    "keywords": ["?", "team", "success", "process", "challenges", "look like"],
+    "sample": "Yes, thank you. What does success look like in the first three months for this role? And how does the team usually collaborate across time zones?"
+  }
+]

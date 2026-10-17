@@ -1,0 +1,4 @@
+# Interfaz de consola moderna (menús, tablas, paneles, colores)
+rich>=13.7
+# SDK oficial de Anthropic (opcional: solo para feedback con IA y conversaciones)
+anthropic>=1.15

@@ -1,0 +1,220 @@
+[
+  {
+    "id": "a1-01",
+    "level": "A1-A2",
+    "title": "Introductions & the verb 'to be'",
+    "title_es": "Presentaciones y el verbo 'to be'",
+    "goal": "Presentarte, decir tu profesión y usar am / is / are sin errores.",
+    "vocabulary": [
+      {"word": "developer", "translation": "desarrollador/a", "example": "I am a software developer."},
+      {"word": "team", "translation": "equipo", "example": "My team is very friendly."},
+      {"word": "coworker", "translation": "compañero/a de trabajo", "example": "She is my coworker."},
+      {"word": "remote", "translation": "remoto", "example": "This is a remote job."},
+      {"word": "company", "translation": "empresa", "example": "The company is in Canada."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-01-1", "type": "mcq", "topic": "verb to be",
+        "prompt": "She ___ a project manager.",
+        "options": ["am", "is", "are", "be"],
+        "answer": 1,
+        "explanation": "Con he / she / it se usa 'is'. 'am' es solo para 'I' y 'are' para you / we / they."
+      },
+      {
+        "id": "a1-01-2", "type": "mcq", "topic": "articles a/an",
+        "prompt": "I am ___ engineer.",
+        "options": ["a", "an", "the", "(nada)"],
+        "answer": 1,
+        "explanation": "Se usa 'an' antes de un sonido vocal (an engineer, an hour) y 'a' antes de sonido consonante (a developer). Además, en inglés las profesiones SIEMPRE llevan artículo: 'I am an engineer', nunca 'I am engineer'."
+      },
+      {
+        "id": "a1-01-3", "type": "translate", "topic": "verb to be",
+        "prompt": "Nosotros somos un equipo remoto.",
+        "answers": ["We are a remote team", "We're a remote team"],
+        "explanation": "'Somos' = 'we are'. Ojo con el orden: en inglés el adjetivo va ANTES del sustantivo: 'remote team' (no 'team remote')."
+      },
+      {
+        "id": "a1-01-4", "type": "reorder", "topic": "word order",
+        "words": ["from", "is", "Mexico", "coworker", "my"],
+        "answer": "My coworker is from Mexico",
+        "explanation": "Estructura básica: Sujeto (My coworker) + verbo (is) + complemento (from Mexico). En inglés el sujeto casi nunca se omite."
+      },
+      {
+        "id": "a1-01-5", "type": "fill", "topic": "verb to be (negative)",
+        "prompt": "They ___ not in the office today. (to be)",
+        "answers": ["are"],
+        "explanation": "Con 'they' el verbo to be es 'are'. La negación se forma añadiendo 'not' después del verbo: 'they are not' (they aren't)."
+      },
+      {
+        "id": "a1-01-6", "type": "mcq", "topic": "verb to be (questions)",
+        "prompt": "¿Cuál es la pregunta correcta?",
+        "options": ["You are a designer?", "Are you a designer?", "Do you are a designer?", "Is you a designer?"],
+        "answer": 1,
+        "explanation": "Para preguntar con 'to be' se invierte el orden: verbo + sujeto. 'Are you...?'. No se usa 'do' con el verbo to be."
+      }
+    ]
+  },
+  {
+    "id": "a1-02",
+    "level": "A1-A2",
+    "title": "Present simple: work routines",
+    "title_es": "Presente simple: rutinas de trabajo",
+    "goal": "Describir tu rutina y no olvidar la '-s' de la tercera persona.",
+    "vocabulary": [
+      {"word": "meeting", "translation": "reunión", "example": "We have a meeting every Monday."},
+      {"word": "schedule", "translation": "horario / agenda", "example": "My schedule is flexible."},
+      {"word": "usually", "translation": "normalmente", "example": "I usually start at 9 a.m."},
+      {"word": "to review", "translation": "revisar", "example": "She reviews the code every day."},
+      {"word": "to deploy", "translation": "desplegar (software)", "example": "We deploy on Fridays."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-02-1", "type": "fill", "topic": "present simple 3rd person",
+        "prompt": "He ___ code every morning. (write)",
+        "answers": ["writes"],
+        "explanation": "En presente simple, con he / she / it el verbo lleva '-s': he writes, she works, it runs. Es el error más común en hispanohablantes."
+      },
+      {
+        "id": "a1-02-2", "type": "mcq", "topic": "present simple negative",
+        "prompt": "She ___ work on weekends.",
+        "options": ["don't", "doesn't", "isn't", "not"],
+        "answer": 1,
+        "explanation": "Negación en presente simple: don't (I/you/we/they) y doesn't (he/she/it). Con 'doesn't' el verbo queda en forma base: 'she doesn't work' (no 'works')."
+      },
+      {
+        "id": "a1-02-3", "type": "reorder", "topic": "adverbs of frequency",
+        "words": ["usually", "I", "at", "start", "nine"],
+        "answer": "I usually start at nine",
+        "explanation": "Los adverbios de frecuencia (always, usually, often, never) van ANTES del verbo principal: 'I usually start', pero DESPUÉS del verbo to be: 'I am usually tired'."
+      },
+      {
+        "id": "a1-02-4", "type": "translate", "topic": "present simple questions",
+        "prompt": "¿Tienes reuniones todos los días?",
+        "answers": ["Do you have meetings every day", "Do you have meetings everyday"],
+        "explanation": "Las preguntas en presente simple usan el auxiliar 'do/does' + sujeto + verbo base: 'Do you have...?'. 'Todos los días' = 'every day' (separado)."
+      },
+      {
+        "id": "a1-02-5", "type": "mcq", "topic": "present simple 3rd person",
+        "prompt": "My manager ___ the reports on Fridays.",
+        "options": ["review", "reviews", "reviewing", "is review"],
+        "answer": 1,
+        "explanation": "'My manager' equivale a 'he/she', así que el verbo lleva '-s': reviews."
+      },
+      {
+        "id": "a1-02-6", "type": "fill", "topic": "present simple questions",
+        "prompt": "___ your team use Slack? (auxiliar)",
+        "answers": ["does", "Does"],
+        "explanation": "'Your team' es tercera persona singular (it), así que el auxiliar es 'Does': 'Does your team use Slack?'."
+      }
+    ]
+  },
+  {
+    "id": "a1-03",
+    "level": "A1-A2",
+    "title": "Past simple: what I did yesterday",
+    "title_es": "Pasado simple: lo que hice ayer",
+    "goal": "Contar qué hiciste usando verbos regulares e irregulares.",
+    "vocabulary": [
+      {"word": "yesterday", "translation": "ayer", "example": "I fixed a bug yesterday."},
+      {"word": "bug", "translation": "error de software", "example": "We found a bug in the app."},
+      {"word": "to fix", "translation": "arreglar / corregir", "example": "She fixed the problem."},
+      {"word": "to send", "translation": "enviar", "example": "I sent the email this morning."},
+      {"word": "last week", "translation": "la semana pasada", "example": "We launched the feature last week."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-03-1", "type": "fill", "topic": "past simple regular",
+        "prompt": "I ___ the bug yesterday. (fix)",
+        "answers": ["fixed"],
+        "explanation": "Los verbos regulares forman el pasado con '-ed': fix → fixed, work → worked. Es igual para todas las personas."
+      },
+      {
+        "id": "a1-03-2", "type": "mcq", "topic": "past simple irregular",
+        "prompt": "She ___ me the file last night.",
+        "options": ["sended", "sent", "send", "sends"],
+        "answer": 1,
+        "explanation": "'Send' es irregular: send → sent. Los irregulares hay que memorizarlos (go → went, make → made, write → wrote)."
+      },
+      {
+        "id": "a1-03-3", "type": "mcq", "topic": "past simple negative",
+        "prompt": "We ___ the meeting.",
+        "options": ["didn't attended", "didn't attend", "don't attended", "not attended"],
+        "answer": 1,
+        "explanation": "En pasado negativo se usa 'didn't' + verbo BASE: 'didn't attend'. El pasado ya lo marca 'did', así que el verbo no lleva '-ed'."
+      },
+      {
+        "id": "a1-03-4", "type": "translate", "topic": "past simple irregular",
+        "prompt": "Ayer fui a la oficina.",
+        "answers": ["I went to the office yesterday", "Yesterday I went to the office", "Yesterday, I went to the office"],
+        "explanation": "'Fui' = 'went' (pasado irregular de 'go'). Y recuerda: 'go to the office' necesita la preposición 'to'."
+      },
+      {
+        "id": "a1-03-5", "type": "reorder", "topic": "past simple questions",
+        "words": ["you", "the", "Did", "report", "finish"],
+        "answer": "Did you finish the report",
+        "explanation": "Preguntas en pasado: Did + sujeto + verbo base. 'Did you finish...?' (no 'Did you finished')."
+      },
+      {
+        "id": "a1-03-6", "type": "fill", "topic": "past simple irregular",
+        "prompt": "They ___ a new app last year. (build)",
+        "answers": ["built"],
+        "explanation": "'Build' es irregular: build → built. Otros parecidos: send → sent, spend → spent."
+      }
+    ]
+  },
+  {
+    "id": "a1-04",
+    "level": "A1-A2",
+    "title": "Future: will & going to",
+    "title_es": "Futuro: will y going to",
+    "goal": "Hablar de planes y promesas en el trabajo.",
+    "vocabulary": [
+      {"word": "deadline", "translation": "fecha límite", "example": "The deadline is next Friday."},
+      {"word": "tomorrow", "translation": "mañana (día)", "example": "I will call you tomorrow."},
+      {"word": "release", "translation": "lanzamiento / versión", "example": "The new release is ready."},
+      {"word": "to plan", "translation": "planear", "example": "We plan the sprint on Monday."},
+      {"word": "soon", "translation": "pronto", "example": "I will reply soon."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-04-1", "type": "mcq", "topic": "going to (plans)",
+        "prompt": "Next month we ___ launch a new version. (ya está planeado)",
+        "options": ["are going to", "going to", "will to", "are go to"],
+        "answer": 0,
+        "explanation": "'Be going to' + verbo se usa para planes ya decididos. Necesita el verbo to be: 'we ARE going to launch'."
+      },
+      {
+        "id": "a1-04-2", "type": "mcq", "topic": "will (promises / decisions)",
+        "prompt": "— The server is down! — Don't worry, I ___ check it now.",
+        "options": ["am going", "will", "going to", "check"],
+        "answer": 1,
+        "explanation": "'Will' se usa para decisiones espontáneas y promesas tomadas en el momento: 'I'll check it now'."
+      },
+      {
+        "id": "a1-04-3", "type": "translate", "topic": "will (promises / decisions)",
+        "prompt": "Te enviaré el informe mañana.",
+        "answers": ["I will send you the report tomorrow", "I'll send you the report tomorrow", "I will send the report to you tomorrow", "I'll send the report to you tomorrow"],
+        "explanation": "Futuro con 'will' + verbo base: 'I will send'. Estructura: send + persona + cosa ('send you the report')."
+      },
+      {
+        "id": "a1-04-4", "type": "fill", "topic": "will (negative)",
+        "prompt": "I ___ be at the meeting; I'm on vacation. (will not, contraído)",
+        "answers": ["won't"],
+        "explanation": "La contracción de 'will not' es 'won't' (no 'willn't')."
+      },
+      {
+        "id": "a1-04-5", "type": "reorder", "topic": "going to (plans)",
+        "words": ["going", "is", "to", "She", "learn", "Python"],
+        "answer": "She is going to learn Python",
+        "explanation": "Estructura: sujeto + am/is/are + going to + verbo base."
+      },
+      {
+        "id": "a1-04-6", "type": "mcq", "topic": "future time expressions",
+        "prompt": "The deadline is ___ Friday.",
+        "options": ["in", "at", "on", "next to"],
+        "answer": 2,
+        "explanation": "Con días de la semana y fechas se usa 'on' (on Friday, on May 5th). 'In' es para meses/años y 'at' para horas."
+      }
+    ]
+  }
+]

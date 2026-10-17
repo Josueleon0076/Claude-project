@@ -1,0 +1,172 @@
+[
+  {
+    "id": "b1-01",
+    "level": "B1",
+    "title": "Present perfect at work",
+    "title_es": "Presente perfecto en el trabajo",
+    "goal": "Hablar de experiencia y avances usando have/has + participio, since/for, already/yet.",
+    "vocabulary": [
+      {"word": "already", "translation": "ya (afirmativo)", "example": "I have already merged the PR."},
+      {"word": "yet", "translation": "todavía / ya (preguntas y negativas)", "example": "Have you tested it yet?"},
+      {"word": "since", "translation": "desde (punto en el tiempo)", "example": "I have worked here since 2021."},
+      {"word": "update", "translation": "actualización / novedad", "example": "Any updates on the ticket?"},
+      {"word": "to merge", "translation": "fusionar (código)", "example": "She has merged the branch."}
+    ],
+    "exercises": [
+      {
+        "id": "b1-01-1", "type": "mcq", "topic": "present perfect vs past simple",
+        "prompt": "I ___ in three remote companies so far.",
+        "options": ["worked", "have worked", "am working", "work"],
+        "answer": 1,
+        "explanation": "'So far' (hasta ahora) indica un periodo que sigue abierto → presente perfecto: 'I have worked'. El pasado simple se usa con tiempos terminados (last year, in 2020)."
+      },
+      {
+        "id": "b1-01-2", "type": "mcq", "topic": "since / for",
+        "prompt": "She has been our tech lead ___ two years.",
+        "options": ["since", "for", "from", "during"],
+        "answer": 1,
+        "explanation": "'For' + duración (for two years, for a month). 'Since' + punto de inicio (since 2022, since Monday)."
+      },
+      {
+        "id": "b1-01-3", "type": "fill", "topic": "present perfect form",
+        "prompt": "Has the client ___ the proposal yet? (approve)",
+        "answers": ["approved"],
+        "explanation": "Presente perfecto = have/has + participio pasado. Para verbos regulares el participio termina en '-ed': approved."
+      },
+      {
+        "id": "b1-01-4", "type": "translate", "topic": "already / yet",
+        "prompt": "Todavía no he terminado la tarea.",
+        "answers": ["I haven't finished the task yet", "I have not finished the task yet"],
+        "explanation": "'Todavía no' en frases negativas = 'not ... yet', y 'yet' va al FINAL de la oración."
+      },
+      {
+        "id": "b1-01-5", "type": "fill", "topic": "irregular participles",
+        "prompt": "We have ___ the documentation for the new API. (write)",
+        "answers": ["written"],
+        "explanation": "Participios irregulares que debes dominar: write → written, do → done, take → taken, give → given, be → been."
+      },
+      {
+        "id": "b1-01-6", "type": "reorder", "topic": "already / yet",
+        "words": ["already", "have", "the", "We", "fixed", "issue"],
+        "answer": "We have already fixed the issue",
+        "explanation": "'Already' suele ir entre 'have/has' y el participio: 'We have already fixed...'."
+      }
+    ]
+  },
+  {
+    "id": "b1-02",
+    "level": "B1",
+    "title": "Conditionals 0, 1 and 2",
+    "title_es": "Condicionales 0, 1 y 2",
+    "goal": "Expresar hechos, posibilidades reales e hipótesis.",
+    "vocabulary": [
+      {"word": "unless", "translation": "a menos que", "example": "We won't ship unless the tests pass."},
+      {"word": "workload", "translation": "carga de trabajo", "example": "My workload is heavy this week."},
+      {"word": "to delay", "translation": "retrasar", "example": "If we delay the launch, we lose clients."},
+      {"word": "budget", "translation": "presupuesto", "example": "If we had a bigger budget, we would hire more people."},
+      {"word": "outage", "translation": "caída del servicio", "example": "If there is an outage, call the on-call engineer."}
+    ],
+    "exercises": [
+      {
+        "id": "b1-02-1", "type": "mcq", "topic": "first conditional",
+        "prompt": "If the tests pass, we ___ the update tonight.",
+        "options": ["would deploy", "will deploy", "deployed", "deploying"],
+        "answer": 1,
+        "explanation": "1er condicional (situación real/probable): If + presente, will + verbo. 'If the tests pass, we will deploy'."
+      },
+      {
+        "id": "b1-02-2", "type": "mcq", "topic": "first conditional",
+        "prompt": "If she ___ late, we will start without her.",
+        "options": ["will be", "is", "would be", "was"],
+        "answer": 1,
+        "explanation": "Error típico: poner 'will' en la parte del 'if'. Después de 'if' va PRESENTE: 'If she is late...'."
+      },
+      {
+        "id": "b1-02-3", "type": "fill", "topic": "second conditional",
+        "prompt": "If I ___ more time, I would learn Rust. (have)",
+        "answers": ["had"],
+        "explanation": "2do condicional (hipotético/imaginario): If + pasado simple, would + verbo. 'If I had more time, I would...'."
+      },
+      {
+        "id": "b1-02-4", "type": "mcq", "topic": "second conditional",
+        "prompt": "If I ___ you, I would ask for a raise.",
+        "options": ["am", "was", "were", "be"],
+        "answer": 2,
+        "explanation": "En el 2do condicional, lo más correcto/formal es 'were' para todas las personas: 'If I were you...'. Es una expresión fija para dar consejos."
+      },
+      {
+        "id": "b1-02-5", "type": "translate", "topic": "zero conditional",
+        "prompt": "Si el servidor falla, la aplicación se detiene.",
+        "answers": ["If the server fails, the application stops", "If the server fails the application stops", "If the server fails, the app stops", "If the server fails the app stops"],
+        "explanation": "Condicional cero (hechos/verdades generales): If + presente, presente. Recuerda la '-s': the server fails, the app stops."
+      },
+      {
+        "id": "b1-02-6", "type": "mcq", "topic": "unless",
+        "prompt": "We won't meet the deadline ___ we get more help.",
+        "options": ["if", "unless", "when", "because"],
+        "answer": 1,
+        "explanation": "'Unless' = 'if not' (a menos que). 'We won't meet the deadline unless we get help' = '...if we don't get help'."
+      }
+    ]
+  },
+  {
+    "id": "b1-03",
+    "level": "B1",
+    "title": "Phrasal verbs & workplace idioms",
+    "title_es": "Phrasal verbs y modismos de trabajo",
+    "goal": "Entender los phrasal verbs y expresiones que más se usan en equipos internacionales.",
+    "vocabulary": [
+      {"word": "to follow up", "translation": "dar seguimiento", "example": "I'll follow up with the client tomorrow."},
+      {"word": "to set up", "translation": "configurar / organizar", "example": "Can you set up a call?"},
+      {"word": "to figure out", "translation": "averiguar / resolver", "example": "We need to figure out the root cause."},
+      {"word": "to run out of", "translation": "quedarse sin", "example": "We ran out of time."},
+      {"word": "on the same page", "translation": "de acuerdo / alineados", "example": "Let's make sure we're on the same page."},
+      {"word": "to touch base", "translation": "ponerse en contacto brevemente", "example": "Let's touch base next week."}
+    ],
+    "exercises": [
+      {
+        "id": "b1-03-1", "type": "mcq", "topic": "phrasal verbs",
+        "prompt": "I'll ___ with the designer and send you an update.",
+        "options": ["follow up", "follow on", "look up", "give up"],
+        "answer": 0,
+        "explanation": "'Follow up (with someone)' = dar seguimiento. 'Give up' = rendirse; 'look up' = buscar (información)."
+      },
+      {
+        "id": "b1-03-2", "type": "mcq", "topic": "phrasal verbs",
+        "prompt": "We still need to ___ why the build is failing.",
+        "options": ["figure out", "find up", "work on out", "take out"],
+        "answer": 0,
+        "explanation": "'Figure out' = averiguar o entender algo después de pensarlo. Es muy común en el día a día técnico."
+      },
+      {
+        "id": "b1-03-3", "type": "mcq", "topic": "workplace idioms",
+        "prompt": "\"Let's make sure we're on the same page\" significa...",
+        "options": ["Leamos la misma página del documento", "Asegurémonos de estar de acuerdo / alineados", "Trabajemos en la misma oficina", "Revisemos la página web"],
+        "answer": 1,
+        "explanation": "'Be on the same page' es un modismo: tener el mismo entendimiento sobre algo. No tiene nada que ver con páginas reales."
+      },
+      {
+        "id": "b1-03-4", "type": "fill", "topic": "phrasal verbs",
+        "prompt": "We ran ___ of time, so let's continue tomorrow.",
+        "answers": ["out"],
+        "explanation": "'Run out of' = quedarse sin algo (time, money, coffee). Las tres palabras van juntas."
+      },
+      {
+        "id": "b1-03-5", "type": "reading", "topic": "reading comprehension",
+        "passage": "Hi team,\nQuick update: the payment integration is taking longer than expected because the provider changed their API. Maria is figuring out the new authentication flow. We'll probably push the release back to next Wednesday. I'll touch base with the client this afternoon to set expectations.\nThanks, Tom",
+        "prompt": "¿Qué va a hacer Tom esta tarde?",
+        "options": ["Arreglar la autenticación", "Hablar con el cliente para ajustar expectativas", "Lanzar la nueva versión", "Cambiar de proveedor de pagos"],
+        "answer": 1,
+        "explanation": "'I'll touch base with the client this afternoon to set expectations' = contactará al cliente para alinear expectativas. Quien resuelve la autenticación es María."
+      },
+      {
+        "id": "b1-03-6", "type": "reading", "topic": "reading comprehension",
+        "passage": "Hi team,\nQuick update: the payment integration is taking longer than expected because the provider changed their API. Maria is figuring out the new authentication flow. We'll probably push the release back to next Wednesday. I'll touch base with the client this afternoon to set expectations.\nThanks, Tom",
+        "prompt": "\"Push the release back\" significa...",
+        "options": ["Adelantar el lanzamiento", "Cancelar el lanzamiento", "Posponer el lanzamiento", "Publicar el lanzamiento"],
+        "answer": 2,
+        "explanation": "'Push back' (a date/meeting/release) = posponer. Lo contrario sería 'bring forward' (adelantar)."
+      }
+    ]
+  }
+]
