@@ -44,9 +44,9 @@ Las respuestas llegan en streaming. Si el modelo rechaza una petición, el pará
 
 | Fase | Contenido | Tipos de ejercicio |
 |---|---|---|
-| **A1-A2 Fundamentos** | to be, presente simple, pasado simple, futuro (will / going to), vocabulario de oficina y tecnología | opción múltiple, traducción, ordenar palabras, completar |
-| **B1 Fluidez operacional** | presente perfecto, condicionales 0/1/2, phrasal verbs, modismos de trabajo | lo anterior + comprensión lectora |
-| **B2-C1 Profesional / remoto** | reuniones y gestión de proyectos, correos con tono profesional, logros con el método STAR | lo anterior + entrevista y corrección de textos |
+| **A1-A2 Fundamentos** (8 lecciones) | to be, presente simple y continuo, pasado simple, futuro (will / going to), can / have to / should, comparativos, there is/are, preposiciones in/on/at | opción múltiple, traducción, ordenar palabras, completar |
+| **B1 Fluidez operacional** (7 lecciones) | presente perfecto, condicionales 0/1/2, phrasal verbs y modismos, pasado continuo, gerundio vs infinitivo, voz pasiva, relativos y estilo indirecto | lo anterior + comprensión lectora |
+| **B2-C1 Profesional / remoto** (7 lecciones) | reuniones y gestión de proyectos, correos profesionales, logros con STAR, feedback y desacuerdo diplomático, presentaciones técnicas, negociación salarial, 3er condicional / wish / should have | lo anterior + entrevista y corrección de textos |
 
 - Una lección se completa al obtener **≥ 70 %**. Si completas todas las de tu nivel, la app te propone subir de nivel (+100 XP).
 - Cada error muestra la regla en español. Con la IA activa puedes pedir además una **explicación ampliada**.
@@ -69,7 +69,7 @@ englishboost-cli/
 │   ├── ai.py                # integración con Claude (feedback, entrevistador, role-play)
 │   ├── content.py           # carga del contenido
 │   └── data/
-│       ├── lessons/         # a1_a2.json, b1.json, b2_c1.json
+│       ├── lessons/         # a1_a2*.json, b1*.json, b2_c1*.json (22 lecciones, 132 ejercicios)
 │       └── interview.json   # banco de preguntas con consejos y respuestas modelo
 └── tests/test_core.py
 ```

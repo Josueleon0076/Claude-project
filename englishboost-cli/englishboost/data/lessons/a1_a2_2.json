@@ -1,0 +1,223 @@
+[
+  {
+    "id": "a1-05",
+    "level": "A1-A2",
+    "title": "Present continuous: what's happening now",
+    "title_es": "Presente continuo: lo que pasa ahora",
+    "goal": "Decir en qué estás trabajando ahora mismo y distinguirlo del presente simple.",
+    "vocabulary": [
+      {"word": "right now", "translation": "ahora mismo", "example": "I'm testing the app right now."},
+      {"word": "to work on", "translation": "trabajar en (algo)", "example": "She is working on the new design."},
+      {"word": "feature", "translation": "funcionalidad", "example": "We are building a new feature."},
+      {"word": "to wait", "translation": "esperar", "example": "I'm waiting for your answer."},
+      {"word": "this week", "translation": "esta semana", "example": "We are working from home this week."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-05-1", "type": "fill", "topic": "present continuous form",
+        "prompt": "I am ___ on the login page right now. (work)",
+        "answers": ["working"],
+        "explanation": "Presente continuo = am / is / are + verbo con -ing. Se usa para acciones que están pasando en este momento: 'I am working'."
+      },
+      {
+        "id": "a1-05-2", "type": "mcq", "topic": "present continuous form",
+        "prompt": "Shh! The team ___ a meeting.",
+        "options": ["have", "is having", "are have", "having"],
+        "answer": 1,
+        "explanation": "Para algo que pasa ahora se necesitan las dos partes: el verbo to be (is) y el verbo con -ing (having). 'Having' solo, sin 'is', es incorrecto."
+      },
+      {
+        "id": "a1-05-3", "type": "mcq", "topic": "present simple vs continuous",
+        "prompt": "She usually ___ from home, but today she is at the office.",
+        "options": ["works", "is working", "work", "working"],
+        "answer": 0,
+        "explanation": "'Usually' indica rutina → presente simple (works). El presente continuo es para lo que pasa ahora o es temporal."
+      },
+      {
+        "id": "a1-05-4", "type": "translate", "topic": "present continuous form",
+        "prompt": "Estoy esperando tu respuesta.",
+        "answers": ["I am waiting for your answer", "I'm waiting for your answer", "I am waiting for your reply", "I'm waiting for your reply", "I am waiting for your response", "I'm waiting for your response"],
+        "explanation": "'Esperar a alguien/algo' = 'wait FOR': 'I'm waiting for your answer'. Sin 'for' la frase queda incompleta."
+      },
+      {
+        "id": "a1-05-5", "type": "reorder", "topic": "present continuous questions",
+        "words": ["you", "Are", "on", "working", "the", "bug"],
+        "answer": "Are you working on the bug",
+        "explanation": "Pregunta en presente continuo: Am / Is / Are + sujeto + verbo -ing. 'Are you working...?'."
+      },
+      {
+        "id": "a1-05-6", "type": "mcq", "topic": "stative verbs",
+        "prompt": "I ___ what you mean.",
+        "options": ["am understanding", "understand", "understanding", "am understand"],
+        "answer": 1,
+        "explanation": "Algunos verbos de estado (understand, know, want, like, need) casi nunca van en -ing, aunque hablemos de 'ahora': 'I understand', no 'I am understanding'."
+      }
+    ]
+  },
+  {
+    "id": "a1-06",
+    "level": "A1-A2",
+    "title": "Can, have to & should",
+    "title_es": "Can, have to y should: habilidad, obligación y consejo",
+    "goal": "Hablar de lo que sabes hacer, lo que tienes que hacer y dar consejos.",
+    "vocabulary": [
+      {"word": "skill", "translation": "habilidad", "example": "Communication is an important skill."},
+      {"word": "to attend", "translation": "asistir", "example": "You have to attend the training."},
+      {"word": "to share", "translation": "compartir", "example": "Can you share your screen?"},
+      {"word": "to ask", "translation": "preguntar / pedir", "example": "You should ask your manager."},
+      {"word": "available", "translation": "disponible", "example": "Are you available tomorrow?"}
+    ],
+    "exercises": [
+      {
+        "id": "a1-06-1", "type": "mcq", "topic": "can (ability)",
+        "prompt": "She ___ speak three languages.",
+        "options": ["cans", "can", "can to", "is can"],
+        "answer": 1,
+        "explanation": "'Can' nunca cambia (no lleva -s) y va seguido del verbo base sin 'to': 'She can speak'."
+      },
+      {
+        "id": "a1-06-2", "type": "translate", "topic": "can (requests)",
+        "prompt": "¿Puedes compartir tu pantalla?",
+        "answers": ["Can you share your screen", "Could you share your screen"],
+        "explanation": "Peticiones: 'Can you...?' (normal) o 'Could you...?' (más cortés). Es una de las frases más usadas en videollamadas."
+      },
+      {
+        "id": "a1-06-3", "type": "mcq", "topic": "have to (obligation)",
+        "prompt": "He ___ finish the report today. It's urgent.",
+        "options": ["have to", "has to", "haves to", "must to"],
+        "answer": 1,
+        "explanation": "'Have to' sí cambia con he / she / it → 'has to'. Y 'must' nunca lleva 'to' ('must finish')."
+      },
+      {
+        "id": "a1-06-4", "type": "mcq", "topic": "don't have to vs mustn't",
+        "prompt": "It's optional. You ___ come to the party.",
+        "options": ["mustn't", "don't have to", "can't", "shouldn't to"],
+        "answer": 1,
+        "explanation": "'Don't have to' = no es necesario. 'Mustn't' = está prohibido. Son muy diferentes aunque se parezcan."
+      },
+      {
+        "id": "a1-06-5", "type": "fill", "topic": "should (advice)",
+        "prompt": "You look tired. You ___ take a break. (consejo)",
+        "answers": ["should"],
+        "explanation": "'Should' + verbo base sirve para dar consejos: 'You should take a break'. Igual que 'can', no lleva 'to' ni '-s'."
+      },
+      {
+        "id": "a1-06-6", "type": "reorder", "topic": "can (negative)",
+        "words": ["attend", "can't", "I", "meeting", "the"],
+        "answer": "I can't attend the meeting",
+        "explanation": "Negativo: can't (cannot) + verbo base. 'I can't attend the meeting' es la forma natural de avisar que no podrás ir."
+      }
+    ]
+  },
+  {
+    "id": "a1-07",
+    "level": "A1-A2",
+    "title": "Comparatives & superlatives",
+    "title_es": "Comparativos y superlativos",
+    "goal": "Comparar herramientas, ofertas y opciones.",
+    "vocabulary": [
+      {"word": "faster", "translation": "más rápido", "example": "This laptop is faster than my old one."},
+      {"word": "cheaper", "translation": "más barato", "example": "The basic plan is cheaper."},
+      {"word": "better", "translation": "mejor", "example": "Python is better for this task."},
+      {"word": "the most", "translation": "el/la más", "example": "It's the most popular tool."},
+      {"word": "salary", "translation": "salario", "example": "The salary is higher in this job."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-07-1", "type": "fill", "topic": "comparatives (short adjectives)",
+        "prompt": "The new server is ___ than the old one. (fast)",
+        "answers": ["faster"],
+        "explanation": "Adjetivos cortos (una sílaba): + '-er' + than. fast → faster than, cheap → cheaper than."
+      },
+      {
+        "id": "a1-07-2", "type": "mcq", "topic": "comparatives (long adjectives)",
+        "prompt": "This job is ___ than my current one.",
+        "options": ["interestinger", "more interesting", "most interesting", "more interestinger"],
+        "answer": 1,
+        "explanation": "Adjetivos largos (dos sílabas o más): 'more' + adjetivo + than. Nunca se combinan 'more' y '-er'."
+      },
+      {
+        "id": "a1-07-3", "type": "mcq", "topic": "irregular comparatives",
+        "prompt": "Your English is ___ than last year!",
+        "options": ["gooder", "more good", "better", "best"],
+        "answer": 2,
+        "explanation": "Irregulares: good → better → the best; bad → worse → the worst. Hay que memorizarlos."
+      },
+      {
+        "id": "a1-07-4", "type": "translate", "topic": "superlatives",
+        "prompt": "Es la herramienta más popular.",
+        "answers": ["It is the most popular tool", "It's the most popular tool"],
+        "explanation": "Superlativo con adjetivo largo: 'the most' + adjetivo. Recuerda el sujeto 'It' (en inglés no se omite) y el orden: adjetivo antes del sustantivo."
+      },
+      {
+        "id": "a1-07-5", "type": "mcq", "topic": "comparatives (than)",
+        "prompt": "Remote work is cheaper ___ commuting every day.",
+        "options": ["that", "then", "than", "as"],
+        "answer": 2,
+        "explanation": "Para comparar se usa 'than' (que). Cuidado: 'then' significa 'entonces' y 'that' es 'ese/que' en otros contextos."
+      },
+      {
+        "id": "a1-07-6", "type": "fill", "topic": "superlatives",
+        "prompt": "Friday is the ___ day of the week for me. (busy)",
+        "answers": ["busiest"],
+        "explanation": "Adjetivos que terminan en consonante + y: la 'y' cambia a 'i' → busy → busier → the busiest. Igual: easy → easiest."
+      }
+    ]
+  },
+  {
+    "id": "a1-08",
+    "level": "A1-A2",
+    "title": "There is / there are & prepositions",
+    "title_es": "There is / there are y preposiciones de tiempo y lugar",
+    "goal": "Describir dónde y cuándo pasan las cosas sin confundir in / on / at.",
+    "vocabulary": [
+      {"word": "there is", "translation": "hay (singular)", "example": "There is a problem with the server."},
+      {"word": "there are", "translation": "hay (plural)", "example": "There are five people on the team."},
+      {"word": "time zone", "translation": "zona horaria", "example": "We are in different time zones."},
+      {"word": "office", "translation": "oficina", "example": "The office is on the third floor."},
+      {"word": "weekend", "translation": "fin de semana", "example": "I don't work at the weekend."}
+    ],
+    "exercises": [
+      {
+        "id": "a1-08-1", "type": "mcq", "topic": "there is / there are",
+        "prompt": "___ three new developers on our team.",
+        "options": ["There is", "There are", "It has", "Has"],
+        "answer": 1,
+        "explanation": "'Hay' se traduce como 'there is' (singular) o 'there are' (plural). Error típico: decir 'It has' o 'Has' por traducir 'hay' literalmente."
+      },
+      {
+        "id": "a1-08-2", "type": "translate", "topic": "there is / there are",
+        "prompt": "Hay un problema con la aplicación.",
+        "answers": ["There is a problem with the application", "There's a problem with the application", "There is a problem with the app", "There's a problem with the app", "There is an issue with the app", "There's an issue with the app", "There is an issue with the application", "There's an issue with the application"],
+        "explanation": "'Hay un problema' = 'There is a problem'. Y 'con' = 'with': 'a problem with the app'."
+      },
+      {
+        "id": "a1-08-3", "type": "mcq", "topic": "prepositions of time",
+        "prompt": "The call is ___ 3 p.m.",
+        "options": ["in", "on", "at", "to"],
+        "answer": 2,
+        "explanation": "Regla de tiempo: AT + hora (at 3 p.m.), ON + día/fecha (on Monday), IN + mes/año/parte del día (in May, in the morning)."
+      },
+      {
+        "id": "a1-08-4", "type": "mcq", "topic": "prepositions of time",
+        "prompt": "I started this job ___ 2023.",
+        "options": ["in", "on", "at", "since of"],
+        "answer": 0,
+        "explanation": "Con años y meses se usa 'in': in 2023, in March."
+      },
+      {
+        "id": "a1-08-5", "type": "fill", "topic": "prepositions of place",
+        "prompt": "My laptop is ___ the desk. (sobre la superficie)",
+        "answers": ["on"],
+        "explanation": "'On' = sobre una superficie (on the desk, on the wall). 'In' = dentro (in the box, in the room). 'At' = en un punto (at the door, at work)."
+      },
+      {
+        "id": "a1-08-6", "type": "mcq", "topic": "there is / there are (questions)",
+        "prompt": "¿Cuál es la pregunta correcta?",
+        "options": ["Is there any questions?", "Are there any questions?", "There are any questions?", "Have any questions there?"],
+        "answer": 1,
+        "explanation": "En preguntas se invierte: 'Is there...?' / 'Are there...?'. 'Questions' es plural, así que 'Are there any questions?' — frase clásica al final de una presentación."
+      }
+    ]
+  }
+]
