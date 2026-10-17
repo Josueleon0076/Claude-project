@@ -9,7 +9,8 @@ import time
 from rich.panel import Panel
 from rich.table import Table
 
-from englishboost import __version__, content, exercises, offline_feedback, srs, ui
+from englishboost import (__version__, achievements, content, exercises, offline_feedback,
+                          srs, ui)
 from englishboost.ai import (CONVERSATION_PROMPT, INTERVIEWER_PROMPT, AIUnavailable,
                              ClaudeTutor)
 from englishboost.db import LEVELS, Database
@@ -57,7 +58,8 @@ class App:
         name, _ = content.LEVEL_INFO[user["level"]]
         console.print(Panel(
             f"[bold]{user['name']}[/]  ·  Nivel [bold cyan]{user['level']}[/] ({name})  ·  "
-            f"⭐ {user['xp']} XP  ·  🔥 {streak} día(s)  ·  🃏 {due} por repasar  ·  {ai}",
+            f"⭐ {user['xp']} XP  ·  🔥 {streak} día(s)  ·  🏅 {len(self.db.unlocked_achievements())} logros  ·  "
+            f"🃏 {due} por repasar  ·  {ai}",
             title=f"[bold magenta]EnglishBoost CLI[/] v{__version__}", border_style="magenta",
         ))
 
@@ -65,6 +67,19 @@ class App:
         self.db.add_xp(xp)
         self.db.record_session(mode, score, total, xp, int(time.time() - started))
         return self.db.touch_streak()
+
+    def announce_achievements(self) -> None:
+        """Muestra los logros recién desbloqueados (si los hay)."""
+        new = achievements.check_new(self.db)
+        if not new:
+            return
+        lines = [f"{a.medal} {a.icon}  [bold]{a.name}[/] — {a.description}  [green]+{a.xp_bonus} XP[/]"
+                 for a in new]
+        console.print(Panel("\n".join(lines),
+                            title="🎉 ¡Nuevo logro desbloqueado!" if len(new) == 1
+                            else f"🎉 ¡{len(new)} logros desbloqueados!",
+                            border_style="bright_yellow"))
+        ui.pause()
 
     # ================== Onboarding ==================
     def onboarding(self) -> None:
@@ -303,6 +318,7 @@ class App:
                 return
             {"1": self.interview_practice, "2": self.live_interview,
              "3": self.roleplay, "4": self.writing_review}[choice]()
+            self.announce_achievements()
 
     def interview_practice(self) -> None:
         questions = content.interview_questions()
@@ -513,7 +529,39 @@ class App:
             console.print(t)
         ui.pause()
 
-    # ================== 5. Explorar lecciones ==================
+    # ================== 5. Logros y medallas ==================
+    def achievements_screen(self) -> None:
+        ui.clear()
+        ui.title("🏅 Mis Logros y Medallas")
+        unlocked = self.db.unlocked_achievements()
+        stats = self.db.achievement_stats()
+        items = achievements.all_achievements()
+        console.print(f"\nDesbloqueados: [bold]{len(unlocked)}/{len(items)}[/]   "
+                      + "   ".join(f"{icon} {sum(1 for a in items if a.tier == t and a.id in unlocked)}"
+                                   f"/{sum(1 for a in items if a.tier == t)} {name}"
+                                   for t, (icon, name, _) in achievements.TIERS.items()) + "\n")
+        categories: dict[str, list] = {}
+        for a in items:
+            categories.setdefault(a.category, []).append(a)
+        for category, group in categories.items():
+            table = Table(title=category, header_style="bold cyan", show_lines=False,
+                          title_justify="left")
+            table.add_column("", width=4)
+            table.add_column("Logro")
+            table.add_column("Cómo conseguirlo")
+            table.add_column("Progreso / Fecha")
+            for a in group:
+                if a.id in unlocked:
+                    table.add_row(f"{a.medal}{a.icon}", f"[bold]{a.name}[/]", a.description,
+                                  f"[green]✓ {unlocked[a.id][:10]}[/]")
+                else:
+                    done, goal = achievements.progress(a, stats)
+                    table.add_row("🔒", f"[dim]{a.name}[/]", f"[dim]{a.description}[/]",
+                                  ui.progress_bar(done, goal, width=10))
+            console.print(table)
+        ui.pause()
+
+    # ================== 6. Explorar lecciones ==================
     def browse(self) -> None:
         ui.clear()
         ui.title("📚 Explorar lecciones")
@@ -530,7 +578,7 @@ class App:
         if choice != "0":
             self.run_lesson(lessons[int(choice) - 1])
 
-    # ================== 6. Ajustes ==================
+    # ================== 7. Ajustes ==================
     def settings(self) -> None:
         while True:
             ui.clear()
@@ -571,7 +619,8 @@ class App:
             self.onboarding()
         actions = {
             "1": self.daily_lesson, "2": self.review, "3": self.speaking_menu,
-            "4": self.stats, "5": self.browse, "6": self.settings,
+            "4": self.stats, "5": self.achievements_screen, "6": self.browse,
+            "7": self.settings,
         }
         while True:
             ui.clear()
@@ -582,14 +631,16 @@ class App:
                 ("2", f"🃏 Repaso de Tarjetas (Spaced Repetition) [dim]({due} pendientes)[/]"),
                 ("3", "🎤 Simulación de Entrevista / Conversación"),
                 ("4", "📈 Mi Progreso y Estadísticas"),
-                ("5", "📚 Explorar todas las lecciones"),
-                ("6", "⚙️  Ajustes"),
+                ("5", "🏅 Mis Logros y Medallas"),
+                ("6", "📚 Explorar todas las lecciones"),
+                ("7", "⚙️  Ajustes"),
                 ("0", "Salir"),
             ], default="1")
             if choice == "0":
                 break
             try:
                 actions[choice]()
+                self.announce_achievements()
             except KeyboardInterrupt:
                 console.print("\n[dim]Sesión interrumpida. Volviendo al menú...[/]")
                 time.sleep(0.6)

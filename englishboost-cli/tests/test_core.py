@@ -138,3 +138,49 @@ def test_offline_email_feedback_flags_false_friend_and_imperatives():
     fb = offline_feedback.evaluate_email("Send me the report. Actually I work at Acme!!")
     joined = " ".join(fb.improve)
     assert "actually" in joined and "Could you" in joined and "saludo" in joined
+
+
+# ---------- Logros y medallas ----------
+from englishboost import achievements  # noqa: E402
+
+
+def test_achievement_ids_unique_and_stats_exist(db):
+    items = achievements.all_achievements()
+    assert len({a.id for a in items}) == len(items)
+    stats = db.achievement_stats()
+    for a in items:
+        assert a.stat in stats, a.id
+        assert a.tier in achievements.TIERS and a.goal > 0
+
+
+def test_first_lesson_unlocks_once_and_gives_xp(db):
+    assert achievements.check_new(db) == []
+    db.record_lesson("a1-01", "A1-A2", 1.0)
+    new = {a.id for a in achievements.check_new(db)}
+    assert new == {"first-lesson", "perfect-1"}
+    assert db.get_user()["xp"] == 50  # 25 + 25 de bonificación (bronce)
+    assert achievements.check_new(db) == []  # no se repiten
+
+
+def test_xp_bonus_can_chain_into_xp_achievement(db):
+    db.add_xp(490)
+    db.record_lesson("a1-01", "A1-A2", 0.8)  # 'Primeros pasos' da +25 → 515 XP
+    new = {a.id for a in achievements.check_new(db)}
+    assert {"first-lesson", "xp-500"} <= new
+
+
+def test_level_medal_requires_all_lessons_of_level(db):
+    ids = [l["id"] for l in content.lessons_for_level("A1-A2")]
+    for lesson_id in ids[:-1]:
+        db.record_lesson(lesson_id, "A1-A2", 0.9)
+    assert "medal-A1-A2" not in {a.id for a in achievements.check_new(db)}
+    db.record_lesson(ids[-1], "A1-A2", 0.9)
+    assert "medal-A1-A2" in {a.id for a in achievements.check_new(db)}
+
+
+def test_session_counters_feed_achievements(db):
+    db.record_session("interview", 7, 10, 14, 120)
+    db.record_session("review", 8, 10, 40, 60)
+    stats = db.achievement_stats()
+    assert stats["interviews"] == 1 and stats["cards_correct"] == 8
+    assert "interview-1" in {a.id for a in achievements.check_new(db)}

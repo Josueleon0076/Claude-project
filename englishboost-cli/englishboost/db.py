@@ -62,6 +62,11 @@ CREATE TABLE IF NOT EXISTS sessions (
     created_at      TEXT    NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS achievements (
+    id              TEXT PRIMARY KEY,
+    unlocked_at     TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS settings (
     key             TEXT PRIMARY KEY,
     value           TEXT NOT NULL
@@ -273,6 +278,46 @@ class Database:
                WHERE times_wrong > 0 ORDER BY times_wrong DESC LIMIT ?""",
             (limit,),
         ).fetchall()
+
+    # ---------- Logros ----------
+    def unlocked_achievements(self) -> dict[str, str]:
+        rows = self.conn.execute("SELECT id, unlocked_at FROM achievements")
+        return {r["id"]: r["unlocked_at"] for r in rows}
+
+    def unlock_achievement(self, achievement_id: str) -> None:
+        self.conn.execute(
+            "INSERT OR IGNORE INTO achievements (id, unlocked_at) VALUES (?, ?)",
+            (achievement_id, _now()),
+        )
+        self.conn.commit()
+
+    def achievement_stats(self) -> dict[str, int]:
+        """Contadores que usan las reglas de logros."""
+        q = self.conn.execute
+        lessons = q("""SELECT COUNT(*) AS done, COALESCE(SUM(best_score >= 1.0), 0) AS perfect
+                       FROM lesson_progress WHERE completed_at IS NOT NULL""").fetchone()
+        modes = {
+            r["kind"]: (r["n"], r["score"])
+            for r in q("""SELECT CASE WHEN mode LIKE 'lesson:%' THEN 'lesson' ELSE mode END AS kind,
+                                 COUNT(*) AS n, COALESCE(SUM(score), 0) AS score
+                          FROM sessions GROUP BY kind""")
+        }
+        user = self.get_user()
+        vocab = self.vocab_counts()
+        return {
+            "xp": user["xp"],
+            "best_streak": user["best_streak"],
+            "lessons_done": lessons["done"],
+            "perfect_lessons": lessons["perfect"],
+            "vocab_total": vocab["total"],
+            "vocab_mastered": vocab["mastered"],
+            "cards_correct": modes.get("review", (0, 0))[1],
+            "interviews": modes.get("interview", (0, 0))[0] + modes.get("live-interview", (0, 0))[0],
+            "conversations": modes.get("conversation", (0, 0))[0],
+            "writings": modes.get("writing", (0, 0))[0],
+            "study_minutes": self.total_study_minutes(),
+            **{f"done_{lvl}": len(self.completed_lessons(lvl)) for lvl in LEVELS},
+        }
 
     # ---------- Ajustes ----------
     def get_setting(self, key: str, default: str | None = None) -> str | None:
